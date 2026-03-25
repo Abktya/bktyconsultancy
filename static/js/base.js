@@ -2543,23 +2543,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Test admin routes
-    console.log('Testing admin route accessibility...');
-    fetch('/admin-test', { 
-        method: 'GET',
-        credentials: 'same-origin'
-    })
-    .then(response => {
-        console.log('Admin test response:', response.status);
-        if (response.ok) {
-            console.log('✅ Admin routes accessible');
-        } else {
-            console.log('❌ Admin routes not accessible:', response.status);
-        }
-    })
-    .catch(error => {
-        console.log('❌ Admin route test failed:', error);
-    });
 });
 
 // Global notification function
@@ -2788,10 +2771,6 @@ fetch('/api/ask-ai-with-code', {
 })
 .then(response => response.json())
 .then(data => {
-    console.log('AI Response:', data.choices[0].message.content);
-    if (data.research_performed) {
-        console.log('Research Info:', data.research_info);
-    }
 });
 
 
@@ -2807,17 +2786,10 @@ fetch('/api/research/search', {
 })
 .then(response => response.json())
 .then(data => {
-    console.log('Search Response:', data);
     if (data.success) {
-        console.log(`Found ${data.total_results} results using ${data.engine}`);
-        console.log('Fallback used:', data.fallback_used);
         data.results.forEach((result, index) => {
-            console.log(`${index + 1}. ${result.title}`);
-            console.log(`   URL: ${result.url}`);
-            console.log(`   Snippet: ${result.snippet.substring(0, 100)}...`);
         });
     } else {
-        console.log('Search failed:', data.error);
     }
 });
 
@@ -2833,7 +2805,6 @@ fetch('/api/research/analyze', {
 })
 .then(response => response.json())
 .then(data => {
-    console.log('Page Analysis:', data.content_summary);
 });
 
 
