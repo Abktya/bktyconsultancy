@@ -1,0 +1,45 @@
+<!-- System Status - Fixed Template -->
+{% extends "base.html" %}
+
+{% block title %}
+{% if lang == 'en' %}System Status - Admin{% else %}Sistem Durumu - Admin{% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
+        <a href="{{ url_for('admin_dashboard') }}" style="background: #6b7280; color: white; padding: 8px 15px; border-radius: 6px; text-decoration: none;">← {% if lang == 'en' %}Back to Dashboard{% else %}Dashboard'a Dön{% endif %}</a>
+        <h1>🖥️ {% if lang == 'en' %}System Status{% else %}Sistem Durumu{% endif %}</h1>
+    </div>
+    
+    <!-- System Information -->
+    <div style="background: rgba(15, 20, 35, 0.85); padding: 25px; border-radius: 12px;">
+        <h3>📊 {% if lang == 'en' %}System Information{% else %}Sistem Bilgileri{% endif %}</h3>
+        
+        <div style="display: grid; gap: 20px; margin-top: 20px;">
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                <strong style="color: #9ca3af;">{% if lang == 'en' %}Database:{% else %}Veritabanı:{% endif %}</strong>
+                {% if system_info.db_exists %}
+                    <span style="color: #22c55e; margin-left: 10px;">✅ {% if lang == 'en' %}Available{% else %}Mevcut{% endif %} ({{ system_info.db_size_mb }} MB)</span>
+                {% else %}
+                    <span style="color: #ef4444; margin-left: 10px;">❌ {% if lang == 'en' %}Not Found{% else %}Bulunamadı{% endif %}</span>
+                {% endif %}
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                <strong style="color: #9ca3af;">{% if lang == 'en' %}Log File:{% else %}Log Dosyası:{% endif %}</strong>
+                {% if system_info.log_exists %}
+                    <span style="color: #22c55e; margin-left: 10px;">✅ {% if lang == 'en' %}Available{% else %}Mevcut{% endif %}</span>
+                {% else %}
+                    <span style="color: #f59e0b; margin-left: 10px;">⚠️ {% if lang == 'en' %}Not Found{% else %}Bulunamadı{% endif %}</span>
+                {% endif %}
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                <strong style="color: #9ca3af;">{% if lang == 'en' %}System Time:{% else %}Sistem Zamanı:{% endif %}</strong>
+                <span style="color: white; margin-left: 10px;">{{ system_info.current_time }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,246 @@
+<!-- templates/user/download_data.html (Türkçe) -->
+{% extends "base.html" %}
+
+{% block title %}Verilerimi İndir - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .download-container {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .download-card {
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .data-category {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .data-category h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .data-items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .data-items li {
+    color: #cccccc;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  .download-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  }
+  
+  .download-btn.secondary {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 15px 0;
+    display: none;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+  
+  .status-message {
+    color: #cccccc;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="download-container">
+  <div class="download-card">
+    <h1 style="color: #ffffff; margin-bottom: 20px;">📥 Verilerimi İndir</h1>
+    
+    <p style="color: #cccccc; margin-bottom: 30px; line-height: 1.6;">
+      GDPR haklarınız kapsamında, sizin hakkınızda topladığımız tüm kişisel verileri indirebilirsiniz. 
+      Bu veriler JSON formatında, okunabilir şekilde size sunulacaktır.
+    </p>
+    
+    <div class="data-category">
+      <h3>👤 Profil Bilgileri</h3>
+      <ul class="data-items">
+        <li>Ad, soyad ve iletişim bilgileri</li>
+        <li>Email adresi ve doğrulama durumu</li>
+        <li>Hesap oluşturma ve son giriş tarihleri</li>
+        <li>Dil tercihleri ve hesap ayarları</li>
+      </ul>
+    </div>
+    
+    <div class="data-category">
+      <h3>🤖 AI Sohbet Verileri</h3>
+      <ul class="data-items">
+        <li>Tüm AI sohbet geçmişi</li>
+        <li>Sorular ve AI yanıtları</li>
+        <li>Kullanılan modeller ve yanıt süreleri</li>
+        <li>Üretilen görüntüler (varsa)</li>
+      </ul>
+    </div>
+    
+    <div class="data-category">
+      <h3>🔒 Gizlilik ve Onaylar</h3>
+      <ul class="data-items">
+        <li>Veri işleme onayları</li>
+        <li>Pazarlama onayları</li>
+        <li>Çerez tercihleri</li>
+        <li>AI veri saklama ayarları</li>
+      </ul>
+    </div>
+    
+    <div class="data-category">
+      <h3>📊 Kullanım Verileri</h3>
+      <ul class="data-items">
+        <li>Giriş yapma geçmişi</li>
+        <li>Sayfa ziyaret logları</li>
+        <li>Hata raporları (varsa)</li>
+        <li>Destek talepleri</li>
+      </ul>
+    </div>
+    
+    <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 20px; margin: 30px 0;">
+      <h3 style="color: #22c55e; margin-bottom: 10px;">ℹ️ Önemli Bilgiler</h3>
+      <ul style="color: #cccccc; line-height: 1.6;">
+        <li>Veri hazırlama işlemi birkaç dakika sürebilir</li>
+        <li>Büyük veri setleri için email ile link gönderilecektir</li>
+        <li>İndirme linki 7 gün geçerli olacaktır</li>
+        <li>Veriler şifrelenmiş ZIP dosyası olarak sunulacaktır</li>
+      </ul>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+      <button class="download-btn" id="downloadBtn">
+        📥 Veri İndirmeyi Başlat
+      </button>
+      
+      
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      
+      <div class="status-message" id="statusMessage"></div>
+      
+      <p style="color: #999; font-size: 0.85rem; margin-top: 20px;">
+        Bu işlem geri alınamaz ve veri hazırlama süreci başlatılır.
+      </p>
+      
+      <div style="margin-top: 20px;">
+        <a href="{{ url_for('user_dashboard') }}" class="download-btn secondary">
+          ← Geri Dön
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script nonce="{{ nonce }}">
+function requestDataDownload() {
+  const btn = document.getElementById('downloadBtn');
+  const progressBar = document.getElementById('progressBar');
+  const progressFill = document.getElementById('progressFill');
+  const statusMessage = document.getElementById('statusMessage');
+  
+  if (!confirm('Tüm verilerinizi indirmek istediğinizden emin misiniz?')) {
+    return;
+  }
+  
+  btn.disabled = true;
+  btn.textContent = 'Hazırlanıyor...';
+  progressBar.style.display = 'block';
+  statusMessage.style.display = 'block';
+  statusMessage.textContent = 'Veri toplama işlemi başlatılıyor...';
+  
+  // Progress simulation
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 90) progress = 90;
+    progressFill.style.width = progress + '%';
+  }, 500);
+  
+  fetch('/api/request-data-download', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      format: 'json',
+      include_ai_data: true,
+      include_logs: true
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    clearInterval(progressInterval);
+    progressFill.style.width = '100%';
+    
+    if (data.success) {
+      statusMessage.innerHTML = `
+        ✅ Veri hazırlama tamamlandı!<br>
+        <strong>İndirme linki email adresinize gönderildi.</strong><br>
+        <small>Talep ID: ${data.request_id}</small>
+      `;
+      btn.textContent = '✅ Tamamlandı';
+      
+      setTimeout(() => {
+        window.location.href = '{{ url_for("user_dashboard") }}';
+      }, 3000);
+    } else {
+      statusMessage.textContent = '❌ Hata: ' + data.error;
+      btn.disabled = false;
+      btn.textContent = '📥 Tekrar Dene';
+    }
+  })
+  .catch(error => {
+    clearInterval(progressInterval);
+    statusMessage.textContent = '❌ Bağlantı hatası oluştu';
+    btn.disabled = false;
+    btn.textContent = '📥 Tekrar Dene';
+  });
+}
+</script>
+{% endblock %}

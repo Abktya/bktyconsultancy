@@ -1,0 +1,157 @@
+
+<!-- templates/en/privacy.html -->
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - BKTY Consultancy{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  <h1>Privacy Policy</h1>
+  
+  <p><strong>Last Updated:</strong> {{ "21.09.2025" }}</p>
+  
+  <h2>1. Data Controller</h2>
+  <p>
+    <strong>BKTY Consultancy</strong><br>
+    Address: [Company Address]<br>
+    Email: privacy@bktyconsultancy.co.uk<br>
+    Phone: +44 20 1234 5678
+  </p>
+  
+  <h2>2. Personal Data We Collect</h2>
+  <p>We may collect the following personal data:</p>
+  <ul>
+    <li><strong>Identity Information:</strong> First name, last name, email address</li>
+    <li><strong>Contact Information:</strong> Phone number, address</li>
+    <li><strong>Technical Data:</strong> IP address, browser information, cookies</li>
+    <li><strong>Usage Data:</strong> Site navigation, AI chat history</li>
+    <li><strong>Business Information:</strong> Company name, position (optional)</li>
+  </ul>
+  
+  <h2>3. Data Processing Purposes</h2>
+  <p>We process your personal data for the following purposes:</p>
+  <ul>
+    <li>Service delivery and customer support</li>
+    <li>Providing AI assistant services</li>
+    <li>Communication and information sharing</li>
+    <li>Fulfilling legal obligations</li>
+    <li>Security and fraud prevention</li>
+    <li>Service improvement and analysis (with your consent)</li>
+  </ul>
+  
+  <h2>4. Legal Basis for Data Processing</h2>
+  <ul>
+    <li><strong>Contract:</strong> Processing necessary for service delivery</li>
+    <li><strong>Legal Obligation:</strong> Fulfilling legal requirements</li>
+    <li><strong>Legitimate Interest:</strong> Security and service improvement</li>
+    <li><strong>Consent:</strong> For marketing and analytics</li>
+  </ul>
+  
+  <h2>5. AI Chat Data</h2>
+  <p>
+    Our special policy regarding AI assistant usage:
+  </p>
+  <ul>
+    <li>Your chat history is stored encrypted</li>
+    <li>Your data is not used for model training</li>
+    <li>You can set your own data retention period (7-365 days)</li>
+    <li>You can delete your chat history at any time</li>
+  </ul>
+  
+  <h2>6. Data Retention Periods</h2>
+  <ul>
+    <li><strong>Account Information:</strong> While account is active</li>
+    <li><strong>AI Chat History:</strong> Your selected period (default 30 days)</li>
+    <li><strong>Log Records:</strong> Maximum 2 years</li>
+    <li><strong>Communication Records:</strong> 5 years</li>
+  </ul>
+  
+  <h2>7. Data Sharing</h2>
+  <p>
+    We only share your data with third parties in the following cases:
+  </p>
+  <ul>
+    <li>Legal requirement</li>
+    <li>With service providers (encrypted and limited)</li>
+    <li>With your explicit consent</li>
+  </ul>
+  
+  <h2>8. Data Security</h2>
+  <p>
+    Measures we take to secure your data:
+  </p>
+  <ul>
+    <li>SSL/TLS encryption</li>
+    <li>Access control and authorization</li>
+    <li>Regular security audits</li>
+    <li>Data backup and recovery plans</li>
+  </ul>
+  
+  <h2>9. Your Rights (GDPR/CCPA)</h2>
+  <p>Your rights regarding your personal data:</p>
+  <ul>
+    <li><strong>Right to Information:</strong> Learn what data is being processed</li>
+    <li><strong>Right of Access:</strong> Get a copy of your data</li>
+    <li><strong>Right to Rectification:</strong> Correct inaccurate information</li>
+    <li><strong>Right to Erasure:</strong> Request deletion of your data</li>
+    <li><strong>Right to Portability:</strong> Transfer your data to other platforms</li>
+    <li><strong>Right to Object:</strong> Object to data processing</li>
+  </ul>
+  
+  <h2>10. Cookies</h2>
+  <p>
+    For detailed information about our cookie usage, please review our 
+    <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>.
+  </p>
+  
+  <h2>11. International Data Transfers</h2>
+  <p>
+    Your data may be transferred to and processed in countries outside your residence. 
+    We ensure adequate protection through appropriate safeguards.
+  </p>
+  
+  <h2>12. Children's Privacy</h2>
+  <p>
+    Our services are not intended for children under 16. We do not knowingly 
+    collect personal data from children under 16.
+  </p>
+  
+  <h2>13. Contact</h2>
+  <p>
+    Contact us regarding privacy matters:
+    <br>
+    Email: <a href="mailto:privacy@bktyconsultancy.co.uk">privacy@bktyconsultancy.co.uk</a>
+    <br>
+    <a href="{{ url_for('gdpr_request') }}">GDPR Request Form</a>
+  </p>
+  
+  <div style="margin-top: 40px; padding: 20px; background: rgba(34, 197, 94, 0.1); border-radius: 12px; border: 1px solid rgba(34, 197, 94, 0.3);">
+    <h3>Quick Actions</h3>
+    <p>
+      <a href="{{ url_for('privacy_settings') }}" class="action-btn">Privacy Settings</a>
+      <a href="{{ url_for('download_data') }}" class="action-btn">Download My Data</a>
+      <a href="{{ url_for('gdpr_request') }}" class="action-btn">GDPR Request</a>
+    </p>
+  </div>
+</div>
+
+<style>
+.action-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+</style>
+{% endblock %}

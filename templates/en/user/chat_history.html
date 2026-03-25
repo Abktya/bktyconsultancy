@@ -1,0 +1,259 @@
+<!-- Chat History Page - Updated with English/Turkish support -->
+{% extends "base.html" %}
+
+{% block title %}
+{% if lang == 'en' %}AI Chat History - BKTY Consultancy{% else %}AI Sohbet Geçmişi - BKTY Consultancy{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .chat-history-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  
+  .chat-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(15, 20, 35, 0.85);
+    border-radius: 15px;
+    align-items: center;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .filter-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .filter-input, .filter-select {
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border-radius: 8px;
+    min-width: 150px;
+  }
+  
+  .filter-input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  .chat-item {
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .chat-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  }
+  
+  .chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .chat-meta {
+    display: flex;
+    gap: 15px;
+    color: #cccccc;
+    font-size: 0.9rem;
+  }
+  
+  .chat-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chat-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(102, 126, 234, 0.8);
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .chat-btn:hover {
+    background: rgba(102, 126, 234, 1);
+    transform: translateY(-1px);
+  }
+  
+  .chat-btn.danger {
+    background: rgba(239, 68, 68, 0.8);
+  }
+  
+  .chat-btn.danger:hover {
+    background: rgba(239, 68, 68, 1);
+  }
+  
+  .chat-question {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  .chat-preview {
+    color: #cccccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(15, 20, 35, 0.85);
+    border-radius: 20px;
+    color: #cccccc;
+  }
+  
+  .empty-state h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .chat-filters {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .filter-group {
+      width: 100%;
+    }
+    
+    .filter-input, .filter-select {
+      min-width: auto;
+    }
+    
+    .chat-header {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+    }
+    
+    .chat-meta {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="chat-history-container">
+  <h1 style="color: #ffffff; margin-bottom: 25px;">
+    💬 {% if lang == 'en' %}AI Chat History{% else %}AI Sohbet Geçmişi{% endif %}
+  </h1>
+  
+  <!-- Filters -->
+  <div class="chat-filters">
+    <div class="filter-group">
+      <label style="color: #cccccc;">
+        {% if lang == 'en' %}Search:{% else %}Ara:{% endif %}
+      </label>
+      <input type="text" class="filter-input" id="searchInput"
+             placeholder="{% if lang == 'en' %}Search in chat content...{% else %}Sohbet içeriğinde ara...{% endif %}">
+    </div>
+    
+    <div class="filter-group">
+      <label style="color: #cccccc;">
+        {% if lang == 'en' %}Model:{% else %}Model:{% endif %}
+      </label>
+      <select class="filter-select" id="modelFilter">
+        <option value="">{% if lang == 'en' %}All Models{% else %}Tüm Modeller{% endif %}</option>
+        <option value="llama">Llama</option>
+        <option value="mistral">Mistral</option>
+        <option value="qwen">Qwen</option>
+        <option value="stable-diffusion">Stable Diffusion</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label style="color: #cccccc;">
+        {% if lang == 'en' %}Date:{% else %}Tarih:{% endif %}
+      </label>
+      <select class="filter-select" id="dateFilter">
+        <option value="">{% if lang == 'en' %}All Time{% else %}Tüm Zamanlar{% endif %}</option>
+        <option value="today">{% if lang == 'en' %}Today{% else %}Bugün{% endif %}</option>
+        <option value="week">{% if lang == 'en' %}This Week{% else %}Bu Hafta{% endif %}</option>
+        <option value="month">{% if lang == 'en' %}This Month{% else %}Bu Ay{% endif %}</option>
+      </select>
+    </div>
+    
+    <button onclick="clearHistory()" class="chat-btn danger" style="margin-left: auto;" id="clearHistoryBtn">
+      🗑️ {% if lang == 'en' %}Clear All{% else %}Tümünü Temizle{% endif %}
+    </button>
+  </div>
+  
+  <!-- Chat List -->
+  <div id="chatList">
+    {% if chats %}
+      {% for chat in chats %}
+        <div class="chat-item" data-model="{{ chat.model }}" data-date="{{ chat.created_at }}">
+          <div class="chat-header">
+            <div class="chat-meta">
+              <span>🤖 {{ chat.model }}</span>
+              <span>📅 {{ chat.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+              <span>⚡ {{ "%.1f" | format(chat.response_time or 0) }}s</span>
+            </div>
+            
+            <div class="chat-actions">
+              <a href="/ai/chat/{{ chat.id }}" class="chat-btn">
+                👁️ {% if lang == 'en' %}View{% else %}Görüntüle{% endif %}
+              </a>
+              <button onclick="deleteChat({{ chat.id }})" class="chat-btn danger delete-chat-btn" data-chat-id="{{ chat.id }}">
+                🗑️ {% if lang == 'en' %}Delete{% else %}Sil{% endif %}
+              </button>
+            </div>
+          </div>
+          
+          <div class="chat-question">
+            {{ chat.question[:150] }}{% if chat.question|length > 150 %}...{% endif %}
+          </div>
+          
+          {% if chat.response %}
+            <div class="chat-preview">
+              {{ chat.response[:200] }}{% if chat.response|length > 200 %}...{% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty-state">
+        <div style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;">🤖</div>
+        <h3>
+          {% if lang == 'en' %}No chat history yet{% else %}Henüz sohbet geçmişi yok{% endif %}
+        </h3>
+        <p>
+          {% if lang == 'en' %}Start chatting with AI assistant{% else %}AI asistanı ile sohbet etmeye başlayın{% endif %}
+        </p>
+        <a href="{{ url_for('ai_chat') }}" class="chat-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-top: 15px;">
+          {% if lang == 'en' %}Start AI Assistant{% else %}AI Asistanını Başlat{% endif %}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

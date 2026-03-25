@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="{{ lang or 'tr' }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}{% if lang == 'en' %}BKTY Consultancy{% else %}BKTY Danışmanlık{% endif %}{% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+  <!-- Flash Messages and Alerts CSS -->
+  <style>
+    /* Flash Messages */
+    .flash-messages {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      max-width: 400px;
+    }
+    
+    .flash-message {
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      animation: slideInRight 0.3s ease-out;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .flash-message.success {
+      background: rgba(34, 197, 94, 0.9);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: white;
+    }
+    
+    .flash-message.error {
+      background: rgba(239, 68, 68, 0.9);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: white;
+    }
+    
+    .flash-message.warning {
+      background: rgba(245, 158, 11, 0.9);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: white;
+    }
+    
+    .flash-message.info {
+      background: rgba(59, 130, 246, 0.9);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: white;
+    }
+    
+    .flash-close {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    
+    .flash-close:hover {
+      opacity: 1;
+    }
+    
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* User Menu Dropdown */
+    .user-menu {
+      position: relative;
+      display: inline-block;
+      z-index: 99999;
+    }
+    
+    .user-menu-toggle {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none !important;
+      min-width: 140px; 
+      justify-content: space-between; 
+    }
+    
+    .user-menu-toggle:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    
+    .user-dropdown {
+      position: absolute;
+      bottom: calc(100% + 6px); /* ⬆️ butonun üstüne taşı */
+      left: 0;                  /* butonun soluna hizala */
+      background: rgba(20, 25, 40, 0.95);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      min-width: 200px;
+      max-width: 240px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      display: none;
+      z-index: 99999 !important;
+    }
+
+    
+    .user-dropdown.show {
+      display: block;
+      animation: fadeInDown 0.2s ease-out;
+    }
+
+    .user-dropdown::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;   /* kutunun altına */
+      left: 20px;     /* butona hizalanacak */
+      border-width: 6px;
+      border-style: solid;
+      border-color: rgba(20, 25, 40, 0.95) transparent transparent transparent;
+    }
+    .user-dropdown .user-info {
+      padding: 12px 16px;
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      color: #ccc;
+      font-size: 0.85rem;
+      line-height: 1.3;
+      word-break: break-word;
+    }
+
+    .user-dropdown .user-info small {
+      display: block;
+      font-size: 0.75rem;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    .user-dropdown a {
+      display: block;
+      padding: 10px 16px;
+      color: white !important;
+      text-decoration: none !important;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: background-color 0.2s ease;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .user-dropdown a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .user-dropdown a:last-child {
+      border-bottom: none;
+    }
+    
+
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Cookie Banner */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(20, 25, 40, 0.95);
+      backdrop-filter: blur(15px);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding: 20px;
+      z-index: 9998;
+      display: none;
+    }
+    
+    .cookie-banner.show {
+      display: block;
+      animation: slideUp 0.3s ease-out;
+    }
+    
+    .cookie-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .cookie-text {
+      flex: 1;
+      min-width: 300px;
+      color: white;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    
+    .cookie-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .cookie-btn {
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .cookie-btn.accept {
+      background: #22c55e;
+      color: white;
+    }
+    
+    .cookie-btn.accept:hover {
+      background: #16a34a;
+    }
+    
+    .cookie-btn.settings {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    .cookie-btn.settings:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <!-- Base CSS (your existing styles) -->
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --glass-bg: rgba(255,255,255,.08);
+      --glass-bd: rgba(255,255,255,.18);
+      --text: #fff;
+      --sidebar-w: 260px;
+      --topbar-height: 70px;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #ffffff;
+      height: 100dvh;
+      min-height: 100dvh;
+      display:flex;
+      background: #2c3e50;
+      overflow-x:hidden;
+    }
+
+    .container p, 
+    .container span, 
+    .container div {
+      color: #ffffff !important;
+    }
+
+    .container h1, 
+    .container h2, 
+    .container h3, 
+    .container h4, 
+    .container h5, 
+    .container h6 {
+      color: #cccccc !important;
+    }
+
+    a, 
+    .container a, 
+    nav a, 
+    .menu-panel a, 
+    .lang-switch a {
+      color: #d1d5db !important; /* Koyu beyaz/açık gri */
+      text-decoration: none !important; /* Alt çizgiyi kaldır */
+    }
+
+    a:hover, 
+    .container a:hover, 
+    nav a:hover, 
+    .menu-panel a:hover, 
+    .lang-switch a:hover {
+      color: #ffffff !important;
+      text-decoration: underline !important;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(transparent, rgba(0,0,0,.55)),
+        url("{{ url_for('static', filename='images/bktyfull.png') }}") center/contain no-repeat,
+        linear-gradient(135deg,#667eea 0%, #764ba2 100%);
+      filter: brightness(.45) saturate(.9);
+      z-index:-2;
+    }
+    body::after{
+      content:"";
+      position:fixed; inset:0;
+      background: linear-gradient(transparent 30%, rgba(0,0,0,.25));
+      z-index:-1;
+      pointer-events:none;
+    }
+
+    /* Sidebar */
+    aside{
+      width:var(--sidebar-w);
+      backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      border-right:1px solid var(--glass-bd);
+      padding:22px 18px;
+      position:fixed; top:0; bottom:0; left:0;
+      display:flex; flex-direction:column; gap:18px;
+      z-index: 100;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.5px;
+    }
+    .brand img{height:28px; width:auto; opacity:.95}
+    nav a{
+      color:#fff; text-decoration:none; display:block;
+      padding:10px 12px; border-radius:12px; font-weight:500;
+      opacity:.95; transition: all 0.2s ease;
+    }
+    nav a:hover{ 
+      background: rgba(255,255,255,.12); 
+      transform: translateX(4px);
+    }
+    nav a.active{
+      background: rgba(102, 126, 234, 0.3);
+      border-left: 3px solid #667eea;
+    }
+    
+    /* User section in sidebar */
+    .user-section {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .lang-switch{
+      display:flex; gap:10px; flex-wrap:wrap
+    }
+    .lang-switch a{
+      border:1px solid var(--glass-bd);
+      padding:8px 10px; border-radius:10px; text-decoration:none; color:#fff;
+      transition: all 0.2s ease;
+    }
+    .lang-switch a:hover{
+      background: rgba(255,255,255,.1);
+    }
+
+    /* Content */
+    main{
+      margin-left:var(--sidebar-w);
+      padding:32px 24px 80px;
+      width:100%;
+      position: relative;
+      z-index: 1;
+    }
+    .container{
+      max-width:1000px; margin:90px auto 0;
+      background: rgba(30,35,50,.75);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+      border-radius:20px; padding:36px;
+      box-shadow:0 8px 32px rgba(0,0,0,.35);
+      animation:slideUp .6s ease-out;
+      position: relative;
+    }
+    .container::before{
+      content:""; position:absolute; inset:-14px;
+      background: radial-gradient(120% 120% at 50% 40%, rgba(0,0,0,.55), rgba(0,0,0,.70));
+      filter: blur(10px);
+      border-radius: 28px; z-index:-1;
+    }
+    h1,h2,h3{ text-shadow: 0 2px 6px rgba(0,0,0,.35); margin-bottom: 16px; }
+    .container p{ line-height: 1.75; font-size: 1.02rem; margin-bottom: 16px; }
+    @keyframes slideUp{from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:none}}
+
+    .version{position:fixed; right:16px; bottom:12px; font-size:.8rem; opacity:.65; z-index: 10;}
+
+    /* Mobile styles */
+    .menu-toggle{display:none}
+    .menu-panel{display:none}
+
+    @media (max-width: 980px){
+      body{
+        display: block;
+      }
+      
+      aside{
+        position:fixed; 
+        left:0; right:0; top: 0;
+        height: var(--topbar-height);
+        width: 100%;
+        flex-direction:row; 
+        align-items:center; 
+        gap:12px; 
+        padding:12px 16px;
+        border-right:none; 
+        border-bottom:1px solid var(--glass-bd);
+        z-index: 1000;
+      }
+      
+      .brand{
+        flex: 1;
+        justify-content: flex-start;
+      }
+      
+      .brand span{
+        font-size: 1.1rem;
+      }
+      
+      nav{display:none}
+      .lang-switch{display: none}
+      .user-section{display: none}
+      
+      .menu-toggle{
+        display:flex !important;
+        align-items: center;
+        justify-content: center;
+        background: transparent; 
+        color:#fff; 
+        border:1px solid var(--glass-bd);
+        padding:10px 14px; 
+        border-radius:8px; 
+        cursor:pointer;
+        font-size: 16px;
+        min-width: 44px;
+        height: 44px;
+        transition: all 0.2s ease;
+        z-index: 1100;
+      }
+      
+      .menu-toggle:hover{
+        background: rgba(255,255,255,.1);
+      }
+      
+      .menu-panel {
+        position: fixed;
+        top: var(--topbar-height);
+        left: 0;
+        right: 0;
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-bd);
+        box-shadow: 0 8px 25px rgba(0,0,0,.4);
+        z-index: 999;
+        display: block !important;
+        overflow-y: auto;  /* 👈 Kaydırılabilir yap */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        max-height: 0;
+        transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+      }
+      
+      .menu-panel.open {
+        max-height: 450px;
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .menu-panel a{
+        display:block; 
+        padding:16px 20px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+      }
+      
+      .menu-panel a:hover{
+        background: rgba(255,255,255,.1);
+      }
+      
+      .menu-panel a:last-child{
+        border-bottom: none;
+      }
+      
+      .lang-section{
+        padding: 16px 20px;
+        border-top: 1px solid rgba(255,255,255,.1);
+        background: rgba(255,255,255,.03);
+      }
+      
+      .lang-section a{
+        display: inline-block;
+        margin-right: 10px;
+        padding: 8px 12px;
+        border: 1px solid var(--glass-bd);
+        border-radius: 6px;
+        font-size: 0.9rem;
+      }
+
+      /* Mobile user section */
+      .mobile-user-section {
+        padding: 16px 20px;
+        border-top: 1px solid rgba(255,255,255,.1);
+        background: rgba(255,255,255,.03);
+      }
+      
+      /* Mobile main content */
+      main{
+        margin-left: 0;
+        margin-top: var(--topbar-height);
+        padding: 20px 16px 60px;
+        width: 100%;
+        min-height: calc(100vh - var(--topbar-height));
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s ease-in-out;
+      }
+      
+      main.menu-pushed{
+        transform: translateY(550px);
+      }
+      
+      .container{
+        margin: 20px auto 0;
+        padding: 24px 20px;
+        border-radius: 16px;
+        max-width: 100%;
+      }
+      
+      .container::before{
+        inset: -8px;
+        border-radius: 20px;
+      }
+      
+      /* Mobile flash messages */
+      .flash-messages {
+        position: fixed;
+        top: 80px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+      }
+      
+      .flash-message {
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+      }
+
+      /* Mobile cookie banner */
+      .cookie-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+      }
+      
+      .cookie-text {
+        min-width: auto;
+        font-size: 0.9rem;
+      }
+      
+      .cookie-buttons {
+        justify-content: center;
+      }
+      
+      /* Mobile typography */
+      h1{ 
+        font-size: 1.75rem; 
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+      h2{ 
+        font-size: 1.4rem; 
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+      h3{ 
+        font-size: 1.2rem; 
+        margin-bottom: 14px;
+        line-height: 1.4;
+      }
+      
+      .container p{
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+      
+      body.menu-open{
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+      }
+    }
+    
+    /* SwipeFoto Dropdown Menu */
+    .nav-item-dropdown {
+      position: relative;
+    }
+
+    .nav-item-dropdown > a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .nav-item-dropdown .dropdown-arrow {
+      font-size: 0.75em;
+      margin-left: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-item-dropdown.open .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      padding-left: 20px;
+    }
+
+    .nav-dropdown.open {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 8px;
+    }
+
+    .nav-dropdown a {
+      padding: 8px 12px !important;
+      font-size: 0.95em;
+      opacity: 0.85;
+      border-left: 2px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 4px;
+    }
+
+    .nav-dropdown a:hover {
+      opacity: 1;
+      border-left-color: #667eea;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+
+
+    @media (max-width: 480px){
+      .container{
+        margin: 10px;
+        padding: 20px 16px;
+      }
+      
+      main{
+        padding: 15px 10px 50px;
+      }
+      
+      main.menu-pushed{
+        transform: translateY(480px);
+      }
+      
+      .brand span{
+        font-size: 1rem;
+      }
+      
+      h1{ font-size: 1.5rem; }
+      h2{ font-size: 1.25rem; }
+      h3{ font-size: 1.1rem; }
+      
+      .container p{
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+  {% block extra_css %}{% endblock %}
+</head>
+  
+<body>
+  <!-- Flash Messages -->
+  <div class="flash-messages" id="flashMessages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-message {{ category }}">
+          {{ message }}
+          <button class="flash-close" data-close>&times;</button>
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Cookie Banner -->
+  {% if not cookie_consent_given %}
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        {% if lang == 'en' %}
+          We use cookies to improve your experience on our website. You can customize your cookie preferences or accept all cookies.
+        {% else %}
+          Web sitemizde deneyiminizi iyileştirmek için çerezler kullanıyoruz. Çerez tercihlerinizi özelleştirebilir veya tüm çerezleri kabul edebilirsiniz.
+        {% endif %}
+      </div>
+      <div class="cookie-buttons">
+        <button class="cookie-btn accept" id="acceptAllBtn">
+          {% if lang == 'en' %}Accept All{% else %}Tümünü Kabul Et{% endif %}
+        </button>
+        <a href="{{ url_for('cookie_settings') }}" class="cookie-btn settings">
+          {% if lang == 'en' %}Cookie Settings{% else %}Çerez Ayarları{% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Sidebar / Topbar -->
+  <aside id="sidebar">
+    <div class="brand">
+      <img src="{{ url_for('static', filename='images/bkty-logo.png') }}" alt="Bkty"/>
+      <span>Bkty Consultancy</span>
+    </div>
+    
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu">☰</button>
+
+    <nav id="desktopNav">
+      {% if lang == "tr" %}
+        <a href="/">🏠 Ana Sayfa</a>
+        <a href="/tr/about">ℹ️ Hakkımızda</a>
+        <a href="/tr/services">⚙️ Hizmetler</a>
+        <a href="/tr/apps">📱 Uygulamalar</a>
+        <div class="nav-item-dropdown">
+          <a href="#" class="swipefoto-toggle" style="cursor: pointer;">
+            📸 SwipeFoto
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <div class="nav-dropdown" id="swipeFotoDropdown">
+            <a href="/tr/swipefoto">📱 Ana Sayfa</a>
+            <a href="/tr/swipefoto/privacy">🔒 Gizlilik Politikası</a>
+            <a href="/tr/swipefoto/terms">📄 Kullanım Şartları</a>
+          </div>
+        </div>
+        <a href="/tr/ai">🤖 AI Asistan</a>
+        <a href="/tr/joker-glint">🧴 Joker Glint</a>
+        <a href="/tr/contact">📞 İletişim</a>
+        {% if current_user and current_user.is_admin %}
+          <a href="{{ url_for('admin_dashboard') }}">⚙️ Admin Panel</a>
+        {% endif %}
+      {% else %}
+        <a href="/en">🏠 Home</a>
+        <a href="/en/about">ℹ️ About</a>
+        <a href="/en/services">⚙️ Services</a>
+        <a href="/en/apps">📱 Apps</a>
+        <div class="nav-item-dropdown">
+          <a href="#" class="swipefoto-toggle" style="cursor: pointer;">
+            📸 SwipeFoto
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <div class="nav-dropdown" id="swipeFotoDropdown">
+            <a href="/en/swipefoto">📱 Home</a>
+            <a href="/en/swipefoto/privacy">🔒 Privacy Policy</a>
+            <a href="/en/swipefoto/terms">📄 Terms of Service</a>
+          </div>
+        </div>
+        <a href="/en/ai">🤖 AI Assistant</a>
+        <a href="/en/joker-glint">🧴 Joker Glint</a>
+        <a href="/en/contact">📞 Contact</a>
+        {% if current_user and current_user.is_admin %}
+          <a href="{{ url_for('admin_dashboard') }}">⚙️ Admin Panel</a>
+        {% endif %}
+      {% endif %}
+    </nav>
+    
+    <!-- User Section (Desktop) -->
+    <div class="user-section">
+      {% if current_user %}
+        <div class="user-menu">
+          <div class="user-menu-toggle" id="userMenuToggle">
+            <span>👤 {{ current_user.first_name }}</span>
+            <span style="font-size: 0.8em;">▼</span>
+          </div>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-info">
+              {{ current_user.first_name }} {{ current_user.last_name }}
+              <br><small>{{ current_user.email }}</small>
+            </div>
+            <a href="{{ url_for('user_dashboard') }}">📊 Dashboard</a>
+            <a href="{{ url_for('user_profile') }}">👤 Profil</a>
+            <a href="{{ url_for('chat_history') }}">💬 AI Sohbetler</a>
+            <a href="{{ url_for('privacy_settings') }}">🔒 Gizlilik</a>
+            {% if current_user.is_admin %}
+              <a href="{{ url_for('admin_dashboard') }}">⚙️ Admin</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}">🚪 Çıkış</a>
+          </div>
+        </div>
+      {% else %}
+        <div style="display: flex; gap: 8px; flex-direction: column;">
+          <a href="{{ url_for('login_page') }}" style="background: rgba(102, 126, 234, 0.3); padding: 8px 12px; border-radius: 8px; text-align: center; text-decoration: none !important;">
+            {% if lang == 'en' %}🔑 Login{% else %}🔑 Giriş{% endif %}
+          </a>
+          <a href="{{ url_for('register_page') }}" style="background: rgba(34, 197, 94, 0.3); padding: 8px 12px; border-radius: 8px; text-align: center; text-decoration: none !important;">
+            {% if lang == 'en' %}📝 Register{% else %}📝 Kayıt{% endif %}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="lang-switch">
+      {% set base_path = request.path %}
+      {% if base_path.startswith('/tr/') %}
+        {% set base_path = base_path[3:] %}
+      {% elif base_path.startswith('/en/') %}
+        {% set base_path = base_path[3:] %}
+      {% endif %}
+      
+      {% if lang == "tr" %}
+        {% if base_path == "/" or base_path == "" %}
+          <a href="/en">🇬🇧 English</a>
+        {% else %}
+          <a href="/en{{ base_path }}">🇬🇧 English</a>
+        {% endif %}
+      {% else %}
+        {% if base_path == "/" or base_path == "" %}
+          <a href="/">🇹🇷 Türkçe</a>
+        {% else %}
+          <a href="/tr{{ base_path }}">🇹🇷 Türkçe</a>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <!-- Mobile dropdown -->
+    <div class="menu-panel" id="menuPanel">
+      {% if lang == "tr" %}
+      <a href="/">🏠 Ana Sayfa</a>
+      <a href="/tr/about">ℹ️ Hakkımızda</a>
+      <a href="/tr/services">⚙️ Hizmetler</a>
+      <a href="/tr/apps">📱 Uygulamalar</a>
+      <div class="nav-item-dropdown">
+        <a href="#" class="swipefoto-toggle-mobile" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span>📸 SwipeFoto</span>
+          <span class="dropdown-arrow">▼</span>
+        </a>
+        <div class="nav-dropdown" id="swipeFotoDropdownMobile">
+          <a href="/tr/swipefoto">📱 Ana Sayfa</a>
+          <a href="/tr/swipefoto/privacy">🔒 Gizlilik Politikası</a>
+          <a href="/tr/swipefoto/terms">📄 Kullanım Şartları</a>
+        </div>
+      </div>
+      <a href="/tr/joker-glint">🧴 Joker Glint</a>
+      <a href="/tr/ai">🤖 AI Asistan</a> 
+      <a href="/tr/contact">📞 İletişim</a>
+      {% if current_user and current_user.is_admin %}
+        <a href="{{ url_for('admin_dashboard') }}">⚙️ Admin Panel</a>
+      {% endif %}
+      {% else %}
+      <a href="/en">🏠 Home</a>
+      <a href="/en/about">ℹ️ About</a>
+      <a href="/en/services">⚙️ Services</a>
+      <a href="/en/apps">📱 Apps</a>
+      <div class="nav-item-dropdown">
+        <a href="#" class="swipefoto-toggle-mobile" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span>📸 SwipeFoto</span>
+          <span class="dropdown-arrow">▼</span>
+        </a>
+        <div class="nav-dropdown" id="swipeFotoDropdownMobile">
+          <a href="/en/swipefoto">📱 Home</a>
+          <a href="/en/swipefoto/privacy">🔒 Privacy Policy</a>
+          <a href="/en/swipefoto/terms">📄 Terms of Service</a>
+        </div>
+      </div>
+      <a href="/en/joker-glint">🧴 Joker Glint</a>
+      <a href="/en/ai">🤖 AI Assistant</a> 
+      <a href="/en/contact">📞 Contact</a>
+      {% if current_user and current_user.is_admin %}
+        <a href="{{ url_for('admin_dashboard') }}">⚙️ Admin Panel</a>
+      {% endif %}
+      {% endif %}
+      
+      <!-- Mobile User Section -->
+      <div class="mobile-user-section">
+        {% if current_user %}
+          <div style="margin-bottom: 12px; color: #ccc; font-size: 0.9rem;">
+            👤 {{ current_user.first_name }} {{ current_user.last_name }}
+          </div>
+          <a href="{{ url_for('user_dashboard') }}">📊 Dashboard</a>
+          <a href="{{ url_for('user_profile') }}">👤 Profil</a>
+          <a href="{{ url_for('chat_history') }}">💬 AI Sohbetler</a>
+          {% if current_user.is_admin %}
+            <a href="{{ url_for('admin_dashboard') }}">⚙️ Admin</a>
+          {% endif %}
+          <a href="{{ url_for('logout') }}">🚪 Çıkış</a>
+        {% else %}
+          <a href="{{ url_for('login_page') }}">🔑 {% if lang == 'en' %}Login{% else %}Giriş{% endif %}</a>
+          <a href="{{ url_for('register_page') }}">📝 {% if lang == 'en' %}Register{% else %}Kayıt{% endif %}</a>
+        {% endif %}
+      </div>
+
+      <div class="lang-section">
+        {% if lang == "tr" %}
+          {% if request.path == "/" %}
+            <a href="/en">🇬🇧 English</a>
+          {% else %}
+            <a href="/en{{ request.path[3:] or '' }}">🇬🇧 English</a>
+          {% endif %}
+        {% else %}
+          {% if request.path == "/en" %}
+            <a href="/">🇹🇷 Türkçe</a>
+          {% else %}
+            <a href="/tr{{ request.path[3:] or '' }}">🇹🇷 Türkçe</a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </aside>
+
+  <!-- Page content -->
+  <main id="mainContent">
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <!-- Base JavaScript -->
+<script src="{{ url_for('static', filename='js/base.js') }}" nonce="{{ nonce }}"></script>
+{% block extra_js %}{% endblock %}
+
+<script nonce="{{ nonce }}">
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🔧 SwipeFoto script loading...');
+  
+  // Desktop toggle
+  document.querySelectorAll('.swipefoto-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('🖱️ Desktop click detected');
+      
+      const dropdown = document.getElementById('swipeFotoDropdown');
+      if (!dropdown) {
+        console.error('❌ Dropdown not found');
+        return;
+      }
+      
+      const parent = this.closest('.nav-item-dropdown');
+      const isOpen = dropdown.classList.toggle('open');
+      parent.classList.toggle('open');
+      console.log('✅ Desktop toggled:', isOpen);
+    });
+  });
+  
+  // Mobile toggle
+  document.querySelectorAll('.swipefoto-toggle-mobile').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('🖱️ Mobile click detected');
+      
+      const dropdown = document.getElementById('swipeFotoDropdownMobile');
+      if (!dropdown) {
+        console.error('❌ Mobile dropdown not found');
+        return;
+      }
+      
+      const parent = this.closest('.nav-item-dropdown');
+      const isOpen = dropdown.classList.toggle('open');
+      parent.classList.toggle('open');
+      console.log('✅ Mobile toggled:', isOpen);
+    });
+  });
+  
+  // Auto-open on SwipeFoto pages
+  const currentPath = window.location.pathname;
+  if (currentPath.includes('/swipefoto')) {
+    const dropdown = document.getElementById('swipeFotoDropdown');
+    const mobileDropdown = document.getElementById('swipeFotoDropdownMobile');
+    
+    if (dropdown) {
+      dropdown.classList.add('open');
+      dropdown.closest('.nav-item-dropdown')?.classList.add('open');
+    }
+    
+    if (mobileDropdown) {
+      mobileDropdown.classList.add('open');
+      mobileDropdown.closest('.nav-item-dropdown')?.classList.add('open');
+    }
+  }
+  
+  console.log('✅ SwipeFoto functions loaded');
+});
+</script>
+</body>
+</html>

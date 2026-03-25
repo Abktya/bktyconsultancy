@@ -1,0 +1,93 @@
+<!-- templates/en/terms.html -->
+{% extends "base.html" %}
+
+{% block title %}Terms of Service - BKTY Consultancy{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  <h1>Terms of Service</h1>
+  
+  <p><strong>Last Updated:</strong> {{ "21.09.2025" }}</p>
+  
+  <h2>1. General Provisions</h2>
+  <p>
+    These terms of service govern the use of the BKTY Consultancy website and services. 
+    By using our site, you agree to these terms.
+  </p>
+  
+  <h2>2. Service Description</h2>
+  <p>
+    BKTY Consultancy provides:
+  </p>
+  <ul>
+    <li>Digital marketing consultancy</li>
+    <li>AI-powered solutions</li>
+    <li>Web automation systems</li>
+    <li>Amazon e-commerce consulting</li>
+    <li>Logistics and export services</li>
+    <li>Custom software development</li>
+  </ul>
+  
+  <h2>3. User Obligations</h2>
+  <p>As users, you agree to:</p>
+  <ul>
+    <li>Provide accurate and current information</li>
+    <li>Use services in compliance with laws</li>
+    <li>Respect others' rights</li>
+    <li>Not misuse the system</li>
+  </ul>
+  
+  <h2>4. AI Assistant Usage</h2>
+  <p>
+    When using our AI assistant service:
+  </p>
+  <ul>
+    <li>Avoid sharing personal and sensitive information</li>
+    <li>Remember that AI responses are advisory in nature</li>
+    <li>Seek professional advice for important decisions</li>
+    <li>Respect copyright in generated content</li>
+  </ul>
+  
+  <h2>5. Intellectual Property</h2>
+  <p>
+    Site content, design, and software are the intellectual property of BKTY Consultancy. 
+    Unauthorized use, copying, or distribution is prohibited.
+  </p>
+  
+  <h2>6. Privacy</h2>
+  <p>
+    Your personal data is processed and protected under our 
+    <a href="{{ url_for('privacy_page') }}">Privacy Policy</a>.
+  </p>
+  
+  <h2>7. Limitation of Liability</h2>
+  <p>
+    BKTY Consultancy is not liable for service interruptions, data loss, or 
+    indirect damages. Services are provided "as is."
+  </p>
+  
+  <h2>8. Changes</h2>
+  <p>
+    We reserve the right to modify these terms. Changes will be announced on the site.
+  </p>
+  
+  <h2>9. Contact</h2>
+  <p>
+    For questions about terms of service:
+    <br>
+    Email: <a href="mailto:legal@bktyconsultancy.co.uk">legal@bktyconsultancy.co.uk</a>
+    <br>
+    Phone: +44 20 1234 5678
+  </p>
+  
+  <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+    <h3>Quick Links</h3>
+    <p>
+      <a href="{{ url_for('privacy_page') }}">Privacy Policy</a> | 
+      <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a> | 
+      <a href="{{ url_for('contact_en') }}">Contact</a> | 
+      <a href="{{ url_for('complaints_page') }}">Complaints</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

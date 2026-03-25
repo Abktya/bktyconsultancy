@@ -1,0 +1,310 @@
+<!-- Delete Account Page - Updated with English/Turkish support -->
+{% extends "base.html" %}
+
+{% block title %}
+{% if lang == 'en' %}Delete Account - BKTY Consultancy{% else %}Hesabı Sil - BKTY Consultancy{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .delete-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  
+  .delete-card {
+    background: rgba(15, 20, 35, 0.9);
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .warning-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  .warning-list {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+  }
+  
+  .warning-list h3 {
+    color: #ef4444;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .warning-list ul {
+    color: #fca5a5;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 20px;
+  }
+  
+  .alternative-options {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+  }
+  
+  .alternative-options h3 {
+    color: #f59e0b;
+    margin-bottom: 10px;
+  }
+  
+  .alternative-options p, .alternative-options ul {
+    color: #fbbf24;
+    line-height: 1.6;
+  }
+  
+  .confirmation-section {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    text-align: left;
+  }
+  
+  .delete-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(239, 68, 68, 0.5);
+    background: rgba(0,0,0,0.3);
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  .delete-input:focus {
+    outline: none;
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  }
+  
+  .delete-input.valid {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+  }
+  
+  .delete-btn {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+  }
+  
+  .delete-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+  }
+  
+  .delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .cancel-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 10px;
+  }
+  
+  .cancel-btn:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  
+  .checkbox-container label {
+    color: #cccccc;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .delete-container {
+      margin: 10px auto;
+    }
+    
+    .delete-card {
+      padding: 25px;
+    }
+    
+    .delete-btn, .cancel-btn {
+      width: 100%;
+      margin: 5px 0;
+    }
+    
+    .warning-icon {
+      font-size: 3rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="delete-container">
+  <div class="delete-card">
+    <div class="warning-icon">⚠️</div>
+    
+    <h1 style="color: #ef4444; text-align: center; margin-bottom: 20px;">
+      {% if lang == 'en' %}Permanently Delete Account{% else %}Hesabı Kalıcı Olarak Sil{% endif %}
+    </h1>
+    
+    <p style="color: #cccccc; text-align: center; margin-bottom: 30px; line-height: 1.6;">
+      {% if lang == 'en' %}
+        This action cannot be undone. When you delete your account, all your data will be permanently deleted.
+      {% else %}
+        Bu işlem geri alınamaz. Hesabınızı sildiğinizde, tüm verileriniz kalıcı olarak silinecektir.
+      {% endif %}
+    </p>
+    
+    <div class="warning-list">
+      <h3>
+        🚨 {% if lang == 'en' %}Data to be Deleted{% else %}Silinecek Veriler{% endif %}
+      </h3>
+      <ul>
+        <li>
+          {% if lang == 'en' %}Your profile information and account settings{% else %}Profil bilgileriniz ve hesap ayarlarınız{% endif %}
+        </li>
+        <li>
+          {% if lang == 'en' %}All AI chat history{% else %}Tüm AI sohbet geçmişi{% endif %}
+        </li>
+        <li>
+          {% if lang == 'en' %}Generated images and files{% else %}Üretilen görüntüler ve dosyalar{% endif %}
+        </li>
+        <li>
+          {% if lang == 'en' %}Privacy preferences and consents{% else %}Gizlilik tercihleri ve onaylar{% endif %}
+        </li>
+        <li>
+          {% if lang == 'en' %}Support requests and communication history{% else %}Destek talepleri ve iletişim geçmişi{% endif %}
+        </li>
+        <li>
+          {% if lang == 'en' %}All usage data and logs{% else %}Tüm kullanım verileri ve loglar{% endif %}
+        </li>
+      </ul>
+    </div>
+    
+    <div class="alternative-options">
+      <h3>
+        💡 {% if lang == 'en' %}Alternative Options{% else %}Alternatif Seçenekler{% endif %}
+      </h3>
+      <p>
+        {% if lang == 'en' %}Instead of deleting your account:{% else %}Hesabınızı silmek yerine:{% endif %}
+      </p>
+      <ul>
+        <li>
+          {% if lang == 'en' %}You can temporarily deactivate your account{% else %}Hesabınızı geçici olarak devre dışı bırakabilirsiniz{% endif %}
+        </li>
+        <li>
+          {% if lang == 'en' %}Delete only your AI data{% else %}Sadece AI verilerinizi silebilirsiniz{% endif %}
+        </li>
+        <li>
+          {% if lang == 'en' %}Turn off email notifications{% else %}Email bildirimlerini kapatabilirsiniz{% endif %}
+        </li>
+        <li>
+          {% if lang == 'en' %}Change your privacy settings{% else %}Gizlilik ayarlarınızı değiştirebilirsiniz{% endif %}
+        </li>
+      </ul>
+    </div>
+    
+    <div class="confirmation-section">
+      <h3 style="color: #ffffff; margin-bottom: 15px;">
+        {% if lang == 'en' %}Confirmation Required{% else %}Onay Gerekli{% endif %}
+      </h3>
+      
+      <p style="color: #cccccc; margin-bottom: 15px;">
+        {% if lang == 'en' %}
+          Are you sure you want to delete your account? To confirm this action, please type 
+          <strong>"DELETE MY ACCOUNT"</strong> in the box below:
+        {% else %}
+          Hesabınızı silmek istediğinizden emin misiniz? Bu işlemi onaylamak için lütfen 
+          <strong>"HESABIMI SIL"</strong> yazın:
+        {% endif %}
+      </p>
+      
+      <input type="text" class="delete-input" id="confirmationInput" 
+             placeholder="{% if lang == 'en' %}Type DELETE MY ACCOUNT...{% else %}HESABIMI SIL yazın...{% endif %}" 
+             maxlength="30">
+      
+      <div class="checkbox-container">
+        <input type="checkbox" id="finalConfirmation">
+        <label for="finalConfirmation">
+          {% if lang == 'en' %}
+            I understand and accept that all my data will be permanently deleted
+          {% else %}
+            Tüm verilerimin kalıcı olarak silineceğini anlıyor ve kabul ediyorum
+          {% endif %}
+        </label>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+      <button onclick="deleteAccount()" class="delete-btn" id="deleteBtn" disabled>
+        🗑️ {% if lang == 'en' %}Permanently Delete Account{% else %}Hesabı Kalıcı Olarak Sil{% endif %}
+      </button>
+      
+      <a href="{{ url_for('user_dashboard') }}" class="cancel-btn">
+        ← {% if lang == 'en' %}Cancel and Go Back{% else %}İptal Et ve Geri Dön{% endif %}
+      </a>
+    </div>
+    
+    <p style="color: #999; font-size: 0.85rem; text-align: center; margin-top: 20px;">
+      {% if lang == 'en' %}
+        This process takes 30 seconds and cannot be undone.
+      {% else %}
+        Bu işlem 30 saniye sürer ve geri alınamaz.
+      {% endif %}
+    </p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,260 @@
+<!-- templates/tr/email_preferences.html (Türkçe) -->
+{% extends "base.html" %}
+
+{% block title %}Email Tercihleri - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .email-container {
+    max-width: 700px;
+    margin: 20px auto;
+  }
+  
+  .email-card {
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .preference-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .preference-info {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .preference-title {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .preference-desc {
+    color: #cccccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .toggle-switch.active {
+    background: #667eea;
+  }
+  
+  .toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .toggle-switch.active::after {
+    left: 33px;
+  }
+  
+  .save-btn {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+  }
+  
+  .save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  }
+  
+  .back-btn {
+    padding: 14px 28px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="email-container">
+  <div class="email-card">
+    <h1 style="color: #ffffff; margin-bottom: 20px;">📧 Email Tercihleri</h1>
+    
+    <p style="color: #cccccc; margin-bottom: 30px; line-height: 1.6;">
+      Hangi email bildirimlerini almak istediğinizi seçebilirsiniz. 
+      Bu ayarları istediğiniz zaman değiştirebilirsiniz.
+    </p>
+    
+    <form method="POST" id="emailPrefsForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      
+      <div class="preference-item">
+        <div class="preference-info">
+          <div class="preference-title">🔔 Sistem Bildirimleri</div>
+          <div class="preference-desc">
+            Güvenlik uyarıları, hesap değişiklikleri ve sistem güncellemeleri
+          </div>
+        </div>
+        <div class="toggle-switch active" data-pref="system_notifications">
+          <input type="hidden" name="system_notifications" value="1">
+        </div>
+      </div>
+      
+      <div class="preference-item">
+        <div class="preference-info">
+          <div class="preference-title">📰 Haber Bülteni</div>
+          <div class="preference-desc">
+            Yeni özellikler, blog yazıları ve şirket haberleri
+          </div>
+        </div>
+        <div class="toggle-switch" data-pref="newsletter">
+          <input type="hidden" name="newsletter" value="0">
+        </div>
+      </div>
+      
+      <div class="preference-item">
+        <div class="preference-info">
+          <div class="preference-title">🎯 Pazarlama Emailları</div>
+          <div class="preference-desc">
+            Özel teklifler, indirimler ve promosyonlar
+          </div>
+        </div>
+        <div class="toggle-switch" data-pref="marketing_emails">
+          <input type="hidden" name="marketing_emails" value="0">
+        </div>
+      </div>
+      
+      <div class="preference-item">
+        <div class="preference-info">
+          <div class="preference-title">🤖 AI Aktivite Bildirimleri</div>
+          <div class="preference-desc">
+            AI sohbet özetleri ve kullanım raporları
+          </div>
+        </div>
+        <div class="toggle-switch" data-pref="ai_notifications">
+          <input type="hidden" name="ai_notifications" value="0">
+        </div>
+      </div>
+      
+      <div class="preference-item">
+        <div class="preference-info">
+          <div class="preference-title">📊 Haftalık Rapor</div>
+          <div class="preference-desc">
+            Hesap aktiviteniz ve kullanım istatistikleri
+          </div>
+        </div>
+        <div class="toggle-switch" data-pref="weekly_report">
+          <input type="hidden" name="weekly_report" value="0">
+        </div>
+      </div>
+      
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 20px; margin: 30px 0;">
+        <h3 style="color: #f59e0b; margin-bottom: 10px;">ℹ️ Önemli Not</h3>
+        <p style="color: #fbbf24; line-height: 1.6;">
+          Sistem bildirimleri güvenlik nedeniyle kapatılamaz. Diğer tüm bildirimleri isteğinize göre ayarlayabilirsiniz.
+        </p>
+      </div>
+      
+      <div style="margin-top: 30px;">
+        <button type="submit" class="save-btn">
+          💾 Tercihleri Kaydet
+        </button>
+        
+        <a href="{{ url_for('user_dashboard') }}" class="back-btn">
+          ← Geri Dön
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script nonce="{{ nonce }}">
+// Toggle switches
+document.querySelectorAll('.toggle-switch').forEach(toggle => {
+  toggle.addEventListener('click', function() {
+    const pref = this.dataset.pref;
+    const input = this.parentNode.querySelector(`input[name="${pref}"]`);
+    
+    // System notifications cannot be disabled
+    if (pref === 'system_notifications') {
+      return;
+    }
+    
+    if (this.classList.contains('active')) {
+      this.classList.remove('active');
+      input.value = '0';
+    } else {
+      this.classList.add('active');
+      input.value = '1';
+    }
+  });
+});
+
+// Form submission
+document.getElementById('emailPrefsForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const saveBtn = document.querySelector('.save-btn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Kaydediliyor...';
+  
+  const formData = new FormData(this);
+  
+  fetch('/api/update-email-preferences', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('Email tercihleri başarıyla güncellendi!');
+      window.location.href = '{{ url_for("user_dashboard") }}';
+    } else {
+      alert('Hata: ' + data.error);
+      saveBtn.disabled = false;
+      saveBtn.textContent = '💾 Tercihleri Kaydet';
+    }
+  })
+  .catch(error => {
+    alert('Güncelleme sırasında hata oluştu');
+    saveBtn.disabled = false;
+    saveBtn.textContent = '💾 Tercihleri Kaydet';
+  });
+});
+</script>
+{% endblock %}

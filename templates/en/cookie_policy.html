@@ -1,0 +1,159 @@
+<!-- templates/en/cookie_policy.html -->
+{% extends "base.html" %}
+
+{% block title %}Cookie Policy - BKTY Consultancy{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  <h1>Cookie Policy</h1>
+  
+  <p><strong>Last Updated:</strong> {{ "21.09.2025" }}</p>
+  
+  <h2>1. What are Cookies?</h2>
+  <p>
+    Cookies are small text files that websites store on users' devices. 
+    These files are used for the website to function properly and provide better service to you.
+  </p>
+  
+  <h2>2. Types of Cookies We Use</h2>
+  
+  <h3>Essential Cookies</h3>
+  <p>Required for basic website functionality:</p>
+  <ul>
+    <li><strong>Session Cookies:</strong> Maintain your login status</li>
+    <li><strong>Security Cookies:</strong> Prevent CSRF attacks</li>
+    <li><strong>Language Preference:</strong> Remember selected language</li>
+    <li><strong>Cookie Consent:</strong> Store your cookie preferences</li>
+  </ul>
+  <p><em>These cookies cannot be disabled.</em></p>
+  
+  <h3>Analytics Cookies</h3>
+  <p>Help us understand site performance:</p>
+  <ul>
+    <li>Page view statistics</li>
+    <li>User behavior analysis</li>
+    <li>Error reporting</li>
+    <li>Site speed measurement</li>
+  </ul>
+  <p><em>You can opt out of these cookies.</em></p>
+  
+  <h3>Marketing Cookies</h3>
+  <p>For providing personalized content:</p>
+  <ul>
+    <li>Interest-based recommendations</li>
+    <li>Email marketing personalization</li>
+    <li>Social media integrations</li>
+  </ul>
+  <p><em>You can opt out of these cookies.</em></p>
+  
+  <h3>Functional Cookies</h3>
+  <p>For enhanced features:</p>
+  <ul>
+    <li>User preference settings</li>
+    <li>AI assistant chat history</li>
+    <li>Form auto-fill</li>
+    <li>Theme and appearance settings</li>
+  </ul>
+  <p><em>You can opt out of these cookies.</em></p>
+  
+  <h2>3. Cookie Details</h2>
+  <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+      <thead>
+        <tr style="background: rgba(255,255,255,0.1);">
+          <th style="border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left;">Cookie Name</th>
+          <th style="border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left;">Purpose</th>
+          <th style="border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left;">Duration</th>
+          <th style="border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left;">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">session</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">User session</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Until browser closes</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Essential</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">csrf_token</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Security</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">1 hour</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Essential</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">cookie_consent</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Cookie preferences</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">1 year</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Essential</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">analytics</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Site analysis</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">2 years</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Analytics</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">user_prefs</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">User preferences</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">6 months</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Functional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <h2>4. Cookie Management</h2>
+  <p>
+    You can manage your cookie preferences through the following methods:
+  </p>
+  
+  <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin: 20px 0;">
+    <h3>Website Settings</h3>
+    <p>
+      <a href="{{ url_for('cookie_settings') }}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 12px 20px; border-radius: 8px; color: white; text-decoration: none; font-weight: 500;">
+        Manage Cookie Settings
+      </a>
+    </p>
+  </div>
+  
+  <h3>Browser Settings</h3>
+  <ul>
+    <li><strong>Chrome:</strong> Settings > Privacy and security > Cookies</li>
+    <li><strong>Firefox:</strong> Preferences > Privacy & Security</li>
+    <li><strong>Safari:</strong> Preferences > Privacy</li>
+    <li><strong>Edge:</strong> Settings > Cookies and site permissions</li>
+  </ul>
+  
+  <h2>5. Third-Party Cookies</h2>
+  <p>
+    In some cases, we may use third-party service cookies:
+  </p>
+  <ul>
+    <li><strong>Google Analytics:</strong> For site analysis</li>
+    <li><strong>Cloudflare:</strong> For security and performance</li>
+    <li><strong>reCAPTCHA:</strong> For spam protection</li>
+  </ul>
+  
+  <h2>6. Cookie Policy Updates</h2>
+  <p>
+    We may update this policy regularly. We will notify you of important changes.
+  </p>
+  
+  <h2>7. Contact</h2>
+  <p>
+    For questions about our cookie policy:
+    <br>
+    Email: <a href="mailto:privacy@bktyconsultancy.co.uk">privacy@bktyconsultancy.co.uk</a>
+  </p>
+  
+  <div style="margin-top: 40px; padding: 20px; background: rgba(102, 126, 234, 0.1); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+    <h3>Change Your Cookie Settings</h3>
+    <p>
+      You can update your cookie preferences at any time.
+    </p>
+    <a href="{{ url_for('cookie_settings') }}" style="background: #667eea; padding: 12px 20px; border-radius: 8px; color: white; text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px;">
+      Update Settings
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,160 @@
+<!-- templates/tr/cookie_policy.html -->
+{% extends "base.html" %}
+
+{% block title %}Çerez Politikası - BKTY Danışmanlık{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  <h1>🍪 Çerez Politikası</h1>
+  
+  <p><strong>Son Güncelleme:</strong> {{ "21.09.2025" }}</p>
+  
+  <h2>1. Çerez Nedir?</h2>
+  <p>
+    Çerezler, web sitelerinin kullanıcıların cihazlarında sakladığı küçük metin dosyalarıdır. 
+    Bu dosyalar web sitesinin düzgün çalışması ve size daha iyi hizmet sunması için kullanılır.
+  </p>
+  
+  <h2>2. Kullandığımız Çerez Türleri</h2>
+  
+  <h3>🔧 Zorunlu Çerezler</h3>
+  <p>Web sitesinin temel işlevleri için gereklidir:</p>
+  <ul>
+    <li><strong>Oturum Çerezleri:</strong> Giriş durumunuzu korur</li>
+    <li><strong>Güvenlik Çerezleri:</strong> CSRF saldırılarını önler</li>
+    <li><strong>Dil Tercihi:</strong> Seçilen dili hatırlar</li>
+    <li><strong>Çerez Onayı:</strong> Çerez tercihlerinizi saklar</li>
+  </ul>
+  <p><em>Bu çerezler devre dışı bırakılamaz.</em></p>
+  
+  <h3>📊 Analitik Çerezler</h3>
+  <p>Site performansını anlamamıza yardımcı olur:</p>
+  <ul>
+    <li>Sayfa görüntüleme istatistikleri</li>
+    <li>Kullanıcı davranış analizi</li>
+    <li>Hata raporlama</li>
+    <li>Site hızı ölçümü</li>
+  </ul>
+  <p><em>Bu çerezleri reddetebilirsiniz.</em></p>
+  
+  <h3>🎯 Pazarlama Çerezleri</h3>
+  <p>Size özelleştirilmiş içerik sunmak için:</p>
+  <ul>
+    <li>İlgi alanı bazlı öneriler</li>
+    <li>Email pazarlama kişiselleştirmesi</li>
+    <li>Sosyal medya entegrasyonları</li>
+  </ul>
+  <p><em>Bu çerezleri reddetebilirsiniz.</em></p>
+  
+  <h3>⚙️ İşlevsel Çerezler</h3>
+  <p>Gelişmiş özellikler için:</p>
+  <ul>
+    <li>Kullanıcı tercih ayarları</li>
+    <li>AI asistan sohbet geçmişi</li>
+    <li>Form otomatik doldurma</li>
+    <li>Tema ve görünüm ayarları</li>
+  </ul>
+  <p><em>Bu çerezleri reddetebilirsiniz.</em></p>
+  
+  <h2>3. Çerez Detayları</h2>
+  <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+      <thead>
+        <tr style="background: rgba(255,255,255,0.1);">
+          <th style="border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left;">Çerez Adı</th>
+          <th style="border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left;">Amacı</th>
+          <th style="border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left;">Süre</th>
+          <th style="border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left;">Tür</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">session</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Kullanıcı oturumu</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Tarayıcı kapanana kadar</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Zorunlu</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">csrf_token</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Güvenlik</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">1 saat</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Zorunlu</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">cookie_consent</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Çerez tercihleri</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">1 yıl</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Zorunlu</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">analytics</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Site analizi</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">2 yıl</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Analitik</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">user_prefs</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">Kullanıcı tercihleri</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">6 ay</td>
+          <td style="border: 1px solid rgba(255,255,255,0.2); padding: 12px;">İşlevsel</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <h2>4. Çerez Yönetimi</h2>
+  <p>
+    Çerez tercihlerinizi aşağıdaki yöntemlerle yönetebilirsiniz:
+  </p>
+  
+  <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin: 20px 0;">
+    <h3>🎛️ Site Üzerinden</h3>
+    <p>
+      <a href="{{ url_for('cookie_settings') }}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 12px 20px; border-radius: 8px; color: white; text-decoration: none; font-weight: 500;">
+        Çerez Ayarlarını Yönet
+      </a>
+    </p>
+  </div>
+  
+  <h3>🌐 Tarayıcı Ayarları</h3>
+  <ul>
+    <li><strong>Chrome:</strong> Ayarlar > Gizlilik ve güvenlik > Çerezler</li>
+    <li><strong>Firefox:</strong> Tercihler > Gizlilik ve Güvenlik</li>
+    <li><strong>Safari:</strong> Tercihler > Gizlilik</li>
+    <li><strong>Edge:</strong> Ayarlar > Çerezler ve site izinleri</li>
+  </ul>
+  
+  <h2>5. Üçüncü Taraf Çerezleri</h2>
+  <p>
+    Bazı durumlarda üçüncü taraf servislerinin çerezlerini kullanabiliriz:
+  </p>
+  <ul>
+    <li><strong>Google Analytics:</strong> Site analizi için</li>
+    <li><strong>Cloudflare:</strong> Güvenlik ve performans için</li>
+    <li><strong>reCAPTCHA:</strong> Spam koruması için</li>
+  </ul>
+  
+  <h2>6. Çerez Güncellemeleri</h2>
+  <p>
+    Bu politikayı düzenli olarak güncelleyebiliriz. Önemli değişiklikler için 
+    size bildirimde bulunacağız.
+  </p>
+  
+  <h2>7. İletişim</h2>
+  <p>
+    Çerez politikası hakkında sorularınız için:
+    <br>
+    Email: <a href="mailto:privacy@bktyconsultancy.co.uk">privacy@bktyconsultancy.co.uk</a>
+  </p>
+  
+  <div style="margin-top: 40px; padding: 20px; background: rgba(102, 126, 234, 0.1); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+    <h3>🔧 Çerez Ayarlarınızı Değiştirin</h3>
+    <p>
+      Çerez tercihlerinizi istediğiniz zaman güncelleyebilirsiniz.
+    </p>
+    <a href="{{ url_for('cookie_settings') }}" style="background: #667eea; padding: 12px 20px; border-radius: 8px; color: white; text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px;">
+      Ayarları Değiştir
+    </a>
+  </div>
+</div>
+{% endblock %}

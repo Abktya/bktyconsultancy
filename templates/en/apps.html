@@ -1,0 +1,479 @@
+{% extends "base.html" %}
+{% set lang = 'en' %}
+{% block title %}Our Applications - Bkty Consultancy{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="container-fluid bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-10 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4">Our Applications</h1>
+        <p class="lead mb-4">Custom software solutions developed with innovative technologies</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <span class="badge bg-light text-primary px-3 py-2">🛡️ Security-Focused</span>
+          <span class="badge bg-light text-primary px-3 py-2">🤖 AI-Powered</span>
+          <span class="badge bg-light text-primary px-3 py-2">📊 Analytics Solutions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  
+  <!-- Featured Application -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card border-0 rounded-4 overflow-hidden shadow-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="card-body p-5 text-white">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <div class="d-flex align-items-center mb-3">
+                <div class="feature-badge bg-white bg-opacity-20 rounded-pill px-3 py-1 me-3">
+                  <small class="fw-bold">FEATURED APPLICATION</small>
+                </div>
+              </div>
+              <h2 class="display-6 fw-bold mb-3">
+                <i class="fas fa-shield-alt me-3"></i>
+                GuardianParent
+              </h2>
+              <p class="lead mb-4">
+                An advanced application developed for parents to safely monitor their children's digital activities. It detects harmful content, monitors screen usage, and provides instant notifications to parents.
+              </p>
+              
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-exclamation-triangle bg-white bg-opacity-20 rounded-circle p-2 me-3"></i>
+                    <small>Harmful Content Detection</small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-clock bg-white bg-opacity-20 rounded-circle p-2 me-3"></i>
+                    <small>Screen Time Monitoring</small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-bell bg-white bg-opacity-20 rounded-circle p-2 me-3"></i>
+                    <small>Instant Notifications</small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-desktop bg-white bg-opacity-20 rounded-circle p-2 me-3"></i>
+                    <small>Multi-Platform Support</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-family fa-5x mb-3"></i>
+                <h5 class="fw-bold">Family Safety</h5>
+                <p class="mb-0">Professional solution for child safety in the digital age</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Applications Grid -->
+  <div class="row g-4 mb-5">
+    
+    <!-- SEOTracker -->
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden application-card">
+        <div class="card-header bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center">
+            <div class="app-icon me-3">
+              <i class="fas fa-chart-line fa-2x"></i>
+            </div>
+            <div>
+              <h3 class="card-title mb-1 h4">SEOTracker</h3>
+              <p class="mb-0 opacity-90">Amazon Analytics Platform</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <p class="mb-4">
+            A professional analytics platform developed for Amazon sellers. It tracks product visibility, rankings, inventory status, and price changes in real-time to enhance sellers' competitive advantage.
+          </p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-eye text-success me-2"></i>
+                <small>Product Visibility</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-sort-numeric-down text-success me-2"></i>
+                <small>Ranking Tracking</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-boxes text-success me-2"></i>
+                <small>Inventory Status</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-dollar-sign text-success me-2"></i>
+                <small>Price Analysis</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BktyAI -->
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden application-card">
+        <div class="card-header bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center">
+            <div class="app-icon me-3">
+              <i class="fas fa-brain fa-2x"></i>
+            </div>
+            <div>
+              <h3 class="card-title mb-1 h4">BktyAI</h3>
+              <p class="mb-0 opacity-90">Artificial Intelligence Platform</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <p class="mb-4">
+            An LLM-based artificial intelligence platform running on local infrastructure. Offers flexible usage with GPT-like chatbot solutions, fine-tuning with custom datasets, web/Telegram/WhatsApp integration, and Alexa Skills support.
+          </p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-comments text-success me-2"></i>
+                <small>GPT Chatbot</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-database text-success me-2"></i>
+                <small>Fine-Tuning</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-link text-success me-2"></i>
+                <small>Multi-Integration</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fab fa-amazon text-success me-2"></i>
+                <small>Alexa Skills</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SystemControlBot -->
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden application-card">
+        <div class="card-header bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center">
+            <div class="app-icon me-3">
+              <i class="fas fa-robot fa-2x"></i>
+            </div>
+            <div>
+              <h3 class="card-title mb-1 h4">SystemControlBot</h3>
+              <p class="mb-0 opacity-90">Automation & Analytics System</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <p class="mb-4">
+            A web automation and data analysis system developed for enterprise customers. Offers form filling, web scraping, reporting, and custom integration solutions.
+          </p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-wpforms text-success me-2"></i>
+                <small>Form Automation</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-spider text-success me-2"></i>
+                <small>Web Scraping</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-chart-bar text-success me-2"></i>
+                <small>Reporting</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-plug text-success me-2"></i>
+                <small>Custom Integration</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SiteTestPro -->
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden application-card">
+        <div class="card-header bg-gradient-to-r from-green-500 to-teal-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center">
+            <div class="app-icon me-3">
+              <i class="fas fa-shield-virus fa-2x"></i>
+            </div>
+            <div>
+              <h3 class="card-title mb-1 h4">SiteTestPro</h3>
+              <p class="mb-0 opacity-90">Web Security Testing Platform</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <p class="mb-4">
+            A comprehensive platform that automates web security testing. Enhances website security with XSS/SQL testing, security headers analysis, and Google Safe Browsing integration.
+          </p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-bug text-success me-2"></i>
+                <small>XSS/SQL Testing</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-header text-success me-2"></i>
+                <small>Security Headers</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fab fa-google text-success me-2"></i>
+                <small>Safe Browsing</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-file-alt text-success me-2"></i>
+                <small>Detailed Reports</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Alexa Skills Section -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card border-0 rounded-4 shadow-sm">
+        <div class="card-header bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center justify-content-center">
+            <div class="app-icon me-3">
+              <i class="fab fa-amazon fa-3x"></i>
+            </div>
+            <div class="text-center">
+              <h3 class="mb-1">Alexa Skills Projects</h3>
+              <p class="mb-0 opacity-90">Voice Assistant Applications</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-5">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <p class="lead mb-4">
+                We have developed solutions compatible with the Alexa ecosystem by creating both educational and entertaining interactive games for children and custom command sets for businesses.
+              </p>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                    <i class="fas fa-child text-primary fa-2x me-3"></i>
+                    <div>
+                      <h6 class="mb-1">Children's Applications</h6>
+                      <small class="text-muted">Educational and entertaining games</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                    <i class="fas fa-building text-success fa-2x me-3"></i>
+                    <div>
+                      <h6 class="mb-1">Enterprise Solutions</h6>
+                      <small class="text-muted">Custom business command sets</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 text-center">
+              <div class="bg-primary bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-microphone fa-4x text-primary mb-3"></i>
+                <h5 class="text-primary">Voice Interaction</h5>
+                <p class="text-muted mb-0">Natural language processing with Alexa technology</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technology Stack -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-primary">Technologies We Use</h2>
+      <div class="row g-4">
+        <div class="col-md-3 text-center">
+          <div class="p-4">
+            <i class="fab fa-python fa-3x text-primary mb-3"></i>
+            <h5>Python</h5>
+            <p class="text-muted">AI/ML & Backend</p>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="p-4">
+            <i class="fab fa-js-square fa-3x text-warning mb-3"></i>
+            <h5>JavaScript</h5>
+            <p class="text-muted">Frontend & Node.js</p>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="p-4">
+            <i class="fas fa-cloud fa-3x text-info mb-3"></i>
+            <h5>Cloud Services</h5>
+            <p class="text-muted">AWS & Azure</p>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="p-4">
+            <i class="fas fa-database fa-3x text-success mb-3"></i>
+            <h5>Databases</h5>
+            <p class="text-muted">SQL & NoSQL</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Industry Applications -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-primary">Industry Applications</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-store fa-3x text-warning mb-3"></i>
+              <h5>E-commerce</h5>
+              <p class="text-muted">Amazon marketplace optimization, inventory management, and sales analytics</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+              <h5>Security</h5>
+              <p class="text-muted">Web security testing, parental controls, and digital safety solutions</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-robot fa-3x text-info mb-3"></i>
+              <h5>Automation</h5>
+              <p class="text-muted">Business process automation, AI chatbots, and workflow optimization</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center py-5">
+        <h2 class="mb-4">Want Custom Application Development?</h2>
+        <p class="lead text-muted mb-4">Contact us for software solutions tailored to your specific needs</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a href="#contact" class="btn btn-primary btn-lg px-4 py-3 rounded-pill">
+            <i class="fas fa-code me-2"></i>Start Your Project
+          </a>
+          <a href="#services" class="btn btn-outline-primary btn-lg px-4 py-3 rounded-pill">
+            <i class="fas fa-info-circle me-2"></i>Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .application-card {
+    transition: all 0.3s ease;
+  }
+  
+  .application-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+  }
+  
+  .app-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+  }
+  
+  .feature-item {
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .feature-badge {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, var(--bs-primary), var(--bs-purple));
+  }
+  
+  .from-indigo-600 { --bs-primary: #4f46e5; }
+  .to-purple-600 { --bs-purple: #9333ea; }
+  .from-orange-500 { --bs-primary: #f97316; }
+  .to-red-500 { --bs-purple: #ef4444; }
+  .from-blue-500 { --bs-primary: #3b82f6; }
+  .to-cyan-500 { --bs-purple: #06b6d4; }
+  .from-purple-500 { --bs-primary: #a855f7; }
+  .to-indigo-500 { --bs-purple: #6366f1; }
+  .from-green-500 { --bs-primary: #22c55e; }
+  .to-teal-500 { --bs-purple: #14b8a6; }
+  .from-yellow-500 { --bs-primary: #eab308; }
+  .to-orange-500 { --bs-purple: #f97316; }
+</style>
+
+{% endblock %}

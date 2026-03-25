@@ -1,0 +1,42 @@
+<!-- templates/en/error/404.html (İngilizce 404) -->
+{% extends "base.html" %}
+
+{% block title %}Page Not Found - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<!-- 404 CSS buraya kopyalanacak -->
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+  <div class="error-code">404</div>
+  <h1 class="error-title">Page Not Found</h1>
+  <p class="error-message">
+    Sorry, the page you are looking for does not exist. It may have been moved, 
+    deleted, or never existed at all.
+  </p>
+  
+  <div class="search-box">
+    <input type="text" class="search-input" placeholder="Search here..." id="searchInput">
+    <button class="search-btn" onclick="performSearch()">Search</button>
+  </div>
+  
+  <div class="error-actions">
+    <a href="{{ url_for('home_en') }}" class="error-btn">
+      🏠 Back to Home
+    </a>
+    
+    <a href="{{ url_for('contact_en') }}" class="error-btn secondary">
+      📞 Contact Us
+    </a>
+    
+    <button onclick="history.back()" class="error-btn secondary">
+      ⬅️ Go Back
+    </button>
+  </div>
+  
+  <div style="margin-top: 40px; color: #999; font-size: 0.9rem;">
+    Error Code: 404 | Time: {{ current_time.strftime('%d.%m.%Y %H:%M') if current_time else '' }}
+  </div>
+</div>
+{% endblock %}

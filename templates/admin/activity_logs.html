@@ -1,0 +1,124 @@
+<!-- Activity Logs Page - Updated with English/Turkish support -->
+{% extends "base.html" %}
+
+{% block title %}
+{% if lang == 'en' %}Activity Logs - Admin{% else %}Aktivite Logları - Admin{% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 1400px; margin: 0 auto;">
+    <h1>🕒 {% if lang == 'en' %}System Activity Logs{% else %}Sistem Aktivite Logları{% endif %}</h1>
+    
+    <!-- Filters -->
+    <div style="background: rgba(15, 20, 35, 0.85); padding: 20px; border-radius: 12px; margin: 20px 0;">
+        <form method="GET" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end;">
+            <div>
+                <label style="color: white; display: block; margin-bottom: 5px;">{% if lang == 'en' %}Activity Type:{% else %}Aktivite Türü:{% endif %}</label>
+                <select name="type" style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 100%;">
+                    <option value="all">{% if lang == 'en' %}All Activities{% else %}Tüm Aktiviteler{% endif %}</option>
+                    <option value="login" {{ 'selected' if filter_type == 'login' }}>{% if lang == 'en' %}Login/Logout{% else %}Giriş/Çıkış{% endif %}</option>
+                    <option value="user" {{ 'selected' if filter_type == 'user' }}>{% if lang == 'en' %}User Actions{% else %}Kullanıcı İşlemleri{% endif %}</option>
+                    <option value="admin" {{ 'selected' if filter_type == 'admin' }}>{% if lang == 'en' %}Admin Actions{% else %}Admin İşlemleri{% endif %}</option>
+                    <option value="error" {{ 'selected' if filter_type == 'error' }}>{% if lang == 'en' %}Errors{% else %}Hatalar{% endif %}</option>
+                </select>
+            </div>
+            <div>
+                <label style="color: white; display: block; margin-bottom: 5px;">{% if lang == 'en' %}User:{% else %}Kullanıcı:{% endif %}</label>
+                <input type="text" name="user" value="{{ filter_user }}" placeholder="{% if lang == 'en' %}Email or name...{% else %}Email veya ad...{% endif %}"
+                       style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 100%;">
+            </div>
+            <div>
+                <label style="color: white; display: block; margin-bottom: 5px;">{% if lang == 'en' %}From Date:{% else %}Başlangıç Tarihi:{% endif %}</label>
+                <input type="date" name="date_from" value="{{ date_from }}"
+                       style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 100%;">
+            </div>
+            <div>
+                <label style="color: white; display: block; margin-bottom: 5px;">{% if lang == 'en' %}To Date:{% else %}Bitiş Tarihi:{% endif %}</label>
+                <input type="date" name="date_to" value="{{ date_to }}"
+                       style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 100%;">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" style="background: #667eea; color: white; border: none; padding: 8px 15px; border-radius: 6px; flex: 1;">
+                    {% if lang == 'en' %}Filter{% else %}Filtrele{% endif %}
+                </button>
+                <a href="{{ url_for('admin_activity_logs') }}" style="background: #6b7280; color: white; padding: 8px 15px; border-radius: 6px; text-decoration: none; text-align: center; flex: 1;">
+                    {% if lang == 'en' %}Reset{% else %}Sıfırla{% endif %}
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Activity List -->
+    <div style="background: rgba(15, 20, 35, 0.85); padding: 20px; border-radius: 12px;">
+        <div style="margin-bottom: 15px; color: #9ca3af;">
+            {% if lang == 'en' %}
+                Showing {{ activities|length }} of {{ pagination.total }} activities
+            {% else %}
+                {{ pagination.total }} aktiviteden {{ activities|length }} tanesi gösteriliyor
+            {% endif %}
+        </div>
+        
+        {% if activities %}
+            <div style="display: flex; flex-direction: column; gap: 12px; max-height: 600px; overflow-y: auto;">
+                {% for activity in activities %}
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid 
+                    {% if 'ERROR' in activity[0] %}#ef4444
+                    {% elif 'ADMIN' in activity[0] %}#8b5cf6
+                    {% elif 'LOGIN' in activity[0] %}#22c55e
+                    {% else %}#667eea{% endif %};">
+                    
+                    <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: start;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                <span style="background: 
+                                    {% if 'ERROR' in activity[0] %}#ef4444
+                                    {% elif 'ADMIN' in activity[0] %}#8b5cf6
+                                    {% elif 'LOGIN' in activity[0] %}#22c55e
+                                    {% else %}#667eea{% endif %}; 
+                                    color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">
+                                    {{ activity[0] }}
+                                </span>
+                                {% if activity[4] %}
+                                    <span style="color: white; font-weight: 500;">
+                                        {{ activity[5] }} {{ activity[6] }} ({{ activity[4] }})
+                                    </span>
+                                {% endif %}
+                                {% if activity[7] %}
+                                    <span style="color: #f59e0b; font-size: 0.8rem;">{% if lang == 'en' %}by{% else %}tarafından{% endif %} {{ activity[7] }}</span>
+                                {% endif %}
+                            </div>
+                            
+                            {% if activity[1] %}
+                                <div style="color: #d1d5db; margin-bottom: 8px;">{{ activity[1] }}</div>
+                            {% endif %}
+                            
+                            <div style="color: #9ca3af; font-size: 0.85rem;">
+                                IP: {{ activity[2] }} | {{ activity[3] }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if pagination.pages > 1 %}
+            <div style="margin-top: 20px; text-align: center;">
+                {% for page_num in range(1, pagination.pages + 1) %}
+                    {% if page_num == pagination.page %}
+                        <span style="background: #667eea; color: white; padding: 8px 12px; margin: 0 2px; border-radius: 4px;">{{ page_num }}</span>
+                    {% else %}
+                        <a href="?page={{ page_num }}&type={{ filter_type }}&user={{ filter_user }}&date_from={{ date_from }}&date_to={{ date_to }}" 
+                           style="background: rgba(255,255,255,0.1); color: white; padding: 8px 12px; margin: 0 2px; border-radius: 4px; text-decoration: none;">{{ page_num }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% else %}
+            <div style="text-align: center; color: #9ca3af; padding: 40px;">
+                {% if lang == 'en' %}No activities found matching your criteria.{% else %}Kriterlerinize uygun aktivite bulunamadı.{% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

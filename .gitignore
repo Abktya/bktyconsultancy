@@ -1,0 +1,52 @@
+
+# Veritabanı
+*.db
+*.sqlite3
+
+# Loglar
+*.log
+logs/
+security.log
+ollama_runner.log
+train_qwen.log
+
+# Sanal ortamlar
+bktyenv/
+lora_env/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Yedek dosyalar
+*_backup.py
+*.bak_*
+
+# Training artefaktları
+*.jsonl
+qwen2.5_lora/
+
+# Medya
+audio.wav
+test.wav
+*.wav
+
+# Üretilen içerik
+uploads/
+static/generated_images/
+static/screenshots/
+static/research_data/
+static/audio/
+
+# Gizli
+.env
+.env.*
+.admin_init_creds
+
+# Diğer
+instance/
+DROP
+.quit

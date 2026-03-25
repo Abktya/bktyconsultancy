@@ -1,0 +1,109 @@
+<!-- templates/en/cookie_settings.html -->
+{% extends "base.html" %}
+
+{% block title %}Cookie Settings - BKTY Consultancy{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">Cookie Settings</h2>
+                </div>
+                <div class="card-body">
+                    <p>You can manage the types of cookies used on our website.</p>
+
+                    <form method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Essential Cookies</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="essential" id="essential" checked disabled>
+                                    <label class="form-check-label" for="essential">
+                                        <strong>Basic Functionality</strong><br>
+                                        <small class="text-muted">Cookies required for site operation (cannot be disabled)</small>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5>Optional Cookies</h5>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" name="analytics" id="analytics" 
+                                           {{ 'checked' if cookie_preferences.get('analytics', False) }}>
+                                    <label class="form-check-label" for="analytics">
+                                        <strong>Analytics Cookies</strong><br>
+                                        <small class="text-muted">Site usage statistics and performance analysis</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" name="marketing" id="marketing"
+                                           {{ 'checked' if cookie_preferences.get('marketing', False) }}>
+                                    <label class="form-check-label" for="marketing">
+                                        <strong>Marketing Cookies</strong><br>
+                                        <small class="text-muted">Personalized ads and content</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" name="preferences" id="preferences"
+                                           {{ 'checked' if cookie_preferences.get('preferences', False) }}>
+                                    <label class="form-check-label" for="preferences">
+                                        <strong>Preference Cookies</strong><br>
+                                        <small class="text-muted">Language, theme, and personal settings</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary me-2">
+                              Save Settings
+                            </button>
+                            <button type="button" class="btn btn-success me-2" data-action="accept-all">
+                              Accept All
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" data-action="reject-all">
+                              Reject All
+                            </button>
+                          </div>
+                          
+                    </form>
+                    
+                    <div class="mt-4">
+                        <h6>Current Status:</h6>
+                        <small class="text-muted">
+                            {% if cookie_consent_given %}
+                                Cookie consent given: {{ cookie_preferences | default('{}') }}
+                            {% else %}
+                                Cookie consent not yet given
+                            {% endif %}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script nonce="{{ nonce }}">
+function acceptAll() {
+    document.getElementById('analytics').checked = true;
+    document.getElementById('marketing').checked = true;
+    document.getElementById('preferences').checked = true;
+}
+
+function rejectAll() {
+    document.getElementById('analytics').checked = false;
+    document.getElementById('marketing').checked = false;
+    document.getElementById('preferences').checked = false;
+}
+</script>
+{% endblock %}

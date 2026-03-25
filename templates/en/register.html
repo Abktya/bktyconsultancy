@@ -1,0 +1,307 @@
+<!-- templates/en/register.html -->
+{% extends "base.html" %}
+
+{% block title %}Register - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-container {
+    max-width: 500px;
+    margin: 30px auto;
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+  
+  .auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .auth-header h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  
+  .auth-header p {
+    color: #cccccc;
+    font-size: 0.95rem;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    display: block;
+    color: #ffffff;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  }
+  
+  .form-input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  .form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .form-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #667eea;
+    margin-top: 2px;
+  }
+  
+  .form-checkbox label {
+    color: #cccccc;
+    font-size: 0.9rem;
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  
+  .form-checkbox.required {
+    border-color: rgba(34, 197, 94, 0.3);
+    background: rgba(34, 197, 94, 0.05);
+  }
+  
+  .auth-button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .auth-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  }
+  
+  .auth-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .auth-links {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .auth-links a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .auth-links a:hover {
+    color: #8b9cf8;
+    text-decoration: underline;
+  }
+  
+  .password-strength {
+    margin-top: 8px;
+    font-size: 0.85rem;
+  }
+  
+  .strength-item {
+    color: #ff6b6b;
+    margin-bottom: 2px;
+  }
+  
+  .strength-item.valid {
+    color: #51cf66;
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .auth-container {
+      margin: 20px 15px;
+      padding: 30px 20px;
+    }
+    
+    .auth-header h1 {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-header">
+    <h1>Create Account</h1>
+    <p>Join BKTY Consultancy and access all our services</p>
+  </div>
+
+  <form method="POST" action="{{ url_for('register_page') }}" id="registerForm">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="form_timestamp" value="{{ form_timestamp }}">
+    
+    <!-- HONEYPOT -->
+    <div style="position:absolute;left:-9999px;" aria-hidden="true">
+        <input type="text" name="website_url" tabindex="-1" autocomplete="off" placeholder="Leave this empty">
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="first_name" class="form-label">First Name *</label>
+        <input type="text" id="first_name" name="first_name" class="form-input" 
+               placeholder="Your first name" required maxlength="50"
+               pattern="^[a-zA-ZçğıöşüÇĞİÖŞÜ\s\-]{2,50}$"
+               title="Letters and spaces only">
+      </div>
+      
+      <div class="form-group">
+        <label for="last_name" class="form-label">Last Name *</label>
+        <input type="text" id="last_name" name="last_name" class="form-input" 
+               placeholder="Your last name" required maxlength="50">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email" class="form-label">Email Address *</label>
+      <input type="email" id="email" name="email" class="form-input" 
+             placeholder="example@email.com" required maxlength="100">
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="company" class="form-label">Company</label>
+        <input type="text" id="company" name="company" class="form-input" 
+               placeholder="Your company (optional)" maxlength="100">
+      </div>
+      
+      <div class="form-group">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="tel" id="phone" name="phone" class="form-input" 
+               placeholder="+44 123 456 7890" maxlength="20">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="password" class="form-label">Password *</label>
+      <input type="password" id="password" name="password" class="form-input" 
+             placeholder="Create a strong password" required minlength="8">
+      <div class="password-strength" id="passwordStrength">
+        <div class="strength-item" id="length">✗ At least 8 characters</div>
+        <div class="strength-item" id="uppercase">✗ At least 1 uppercase letter</div>
+        <div class="strength-item" id="lowercase">✗ At least 1 lowercase letter</div>
+        <div class="strength-item" id="number">✗ At least 1 number</div>
+        <div class="strength-item" id="special">✗ At least 1 special character</div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="confirm_password" class="form-label">Confirm Password *</label>
+      <input type="password" id="confirm_password" name="confirm_password" class="form-input" 
+             placeholder="Confirm your password" required>
+      <div id="passwordMatch" style="margin-top: 8px; font-size: 0.85rem;"></div>
+    </div>
+    
+    <!-- Legal Consents -->
+    <div class="form-checkbox required">
+      <input type="checkbox" id="privacy_accepted" name="privacy_accepted" required>
+      <label for="privacy_accepted">
+        I have read and accept the <a href="{{ url_for('privacy_page') }}" target="_blank">Privacy Policy</a> *
+      </label>
+    </div>
+    
+    <div class="form-checkbox required">
+      <input type="checkbox" id="terms_accepted" name="terms_accepted" required>
+      <label for="terms_accepted">
+        I have read and accept the <a href="{{ url_for('terms_page') }}" target="_blank">Terms of Service</a> *
+      </label>
+    </div>
+    
+    <div class="form-checkbox">
+      <input type="checkbox" id="data_processing_consent" name="data_processing_consent">
+      <label for="data_processing_consent">
+        I consent to the processing of my personal data for service improvement purposes
+      </label>
+    </div>
+    
+    <div class="form-checkbox">
+      <input type="checkbox" id="marketing_consent" name="marketing_consent">
+      <label for="marketing_consent">
+        I would like to receive marketing and promotional emails
+      </label>
+    </div>
+    
+    <!-- CLOUDFLARE TURNSTILE WIDGET -->
+    {% set site_key = config.get('TURNSTILE_SITE_KEY') %}
+    {% if site_key %}
+    <div style="margin: 25px 0; display: flex; justify-content: center;">
+      <div class="cf-turnstile" 
+           data-sitekey="0x4AAAAAAB4lJ2QKXD_xbyRJ"
+           data-theme="dark"
+           data-size="normal"></div>
+  </div>
+    {% endif %}
+    
+    <button type="submit" class="auth-button" id="submitButton" disabled>
+      Create Account
+    </button>
+    
+    <div class="auth-links">
+      <a href="{{ url_for('login_page') }}">Already have an account? Sign in</a>
+    </div>
+  </form>
+</div>
+
+<!-- Cloudflare Turnstile Script -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer nonce="{{ nonce }}"></script>
+{% endblock %}

@@ -1,0 +1,202 @@
+<!-- templates/error/404.html -->
+{% extends "base.html" %}
+
+{% block title %}Sayfa Bulunamadı - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .error-container {
+    text-align: center;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 40px;
+  }
+  
+  .error-code {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  .error-title {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .error-message {
+    font-size: 1.2rem;
+    color: #cccccc;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  
+  .error-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .error-btn {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .error-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  }
+  
+  .error-btn.secondary {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .error-btn.secondary:hover {
+    background: rgba(255,255,255,0.2);
+    box-shadow: 0 5px 20px rgba(255,255,255,0.1);
+  }
+  
+  .search-box {
+    margin: 30px 0;
+    display: flex;
+    gap: 10px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255,255,255,0.12);
+  }
+  
+  .search-input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  .search-btn {
+    padding: 12px 20px;
+    background: #667eea;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .error-code {
+      font-size: 5rem;
+    }
+    
+    .error-title {
+      font-size: 2rem;
+    }
+    
+    .error-message {
+      font-size: 1rem;
+    }
+    
+    .search-box {
+      flex-direction: column;
+    }
+    
+    .error-actions {
+      gap: 10px;
+    }
+    
+    .error-btn {
+      font-size: 1rem;
+      padding: 12px 25px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+  <div class="error-code">404</div>
+  <h1 class="error-title">Sayfa Bulunamadı</h1>
+  <p class="error-message">
+    Üzgünüz, aradığınız sayfa mevcut değil. Sayfa taşınmış, silinmiş veya 
+    hiç var olmamış olabilir.
+  </p>
+  
+  <div class="search-box">
+    <input type="text" class="search-input" placeholder="Aradığınızı buraya yazın..." id="searchInput">
+    <button class="search-btn" onclick="performSearch()">Ara</button>
+  </div>
+  
+  <div class="error-actions">
+    <a href="{{ url_for('home') }}" class="error-btn">
+      🏠 Ana Sayfaya Dön
+    </a>
+    
+    <a href="{{ url_for('contact_tr') }}" class="error-btn secondary">
+      📞 Bize Ulaşın
+    </a>
+    
+    <button onclick="history.back()" class="error-btn secondary">
+      ⬅️ Geri Git
+    </button>
+  </div>
+  
+  <div style="margin-top: 40px; color: #999; font-size: 0.9rem;">
+    Hata Kodu: 404 | Zaman: {{ moment().strftime('%d.%m.%Y %H:%M') if moment else '' }}
+  </div>
+</div>
+
+<script>
+function performSearch() {
+  const query = document.getElementById('searchInput').value.trim();
+  if (query) {
+    // Site içi arama - bu kısmı site yapınıza göre güncelleyin
+    window.location.href = `/?search=${encodeURIComponent(query)}`;
+  }
+}
+
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    performSearch();
+  }
+});
+</script>
+{% endblock %}

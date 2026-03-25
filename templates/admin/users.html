@@ -1,0 +1,86 @@
+<!-- User Management Page - Updated with English/Turkish support -->
+{% extends "base.html" %}
+
+{% block title %}
+{% if lang == 'en' %}User Management - Admin{% else %}Kullanıcı Yönetimi - Admin{% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 0 auto;">
+    <h1>👥 {% if lang == 'en' %}User Management{% else %}Kullanıcı Yönetimi{% endif %}</h1>
+    
+    <div style="background: rgba(15, 20, 35, 0.85); padding: 20px; border-radius: 12px; margin: 20px 0;">
+        <form method="GET" style="display: flex; gap: 15px; align-items: end; flex-wrap: wrap;">
+            <div>
+                <label style="color: white; display: block; margin-bottom: 5px;">{% if lang == 'en' %}Search:{% else %}Ara:{% endif %}</label>
+                <input type="text" name="search" value="{{ search }}" 
+                       style="padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+            </div>
+            <div>
+                <label style="color: white; display: block; margin-bottom: 5px;">{% if lang == 'en' %}Status:{% else %}Durum:{% endif %}</label>
+                <select name="status" style="padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                    <option value="all">{% if lang == 'en' %}All{% else %}Tümü{% endif %}</option>
+                    <option value="active" {{ 'selected' if status_filter == 'active' }}>{% if lang == 'en' %}Active{% else %}Aktif{% endif %}</option>
+                    <option value="inactive" {{ 'selected' if status_filter == 'inactive' }}>{% if lang == 'en' %}Inactive{% else %}Pasif{% endif %}</option>
+                    <option value="admin" {{ 'selected' if status_filter == 'admin' }}>Admin</option>
+                </select>
+            </div>
+            <button type="submit" style="background: #667eea; color: white; border: none; padding: 8px 15px; border-radius: 6px;">
+                {% if lang == 'en' %}Filter{% else %}Filtrele{% endif %}
+            </button>
+        </form>
+    </div>
+    
+    <div style="background: rgba(15, 20, 35, 0.85); padding: 20px; border-radius: 12px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="border-bottom: 2px solid rgba(255,255,255,0.2);">
+                    <th style="text-align: left; padding: 10px; color: white;">Email</th>
+                    <th style="text-align: left; padding: 10px; color: white;">{% if lang == 'en' %}Full Name{% else %}Ad Soyad{% endif %}</th>
+                    <th style="text-align: left; padding: 10px; color: white;">{% if lang == 'en' %}Status{% else %}Durum{% endif %}</th>
+                    <th style="text-align: left; padding: 10px; color: white;">{% if lang == 'en' %}Registration Date{% else %}Kayıt Tarihi{% endif %}</th>
+                    <th style="text-align: center; padding: 10px; color: white;">{% if lang == 'en' %}Actions{% else %}İşlemler{% endif %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 10px; color: white;">{{ user[1] }}</td>
+                    <td style="padding: 10px; color: white;">{{ user[2] }} {{ user[3] }}</td>
+                    <td style="padding: 10px;">
+                        {% if user[5] %}
+                            <span style="background: #22c55e; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">{% if lang == 'en' %}Active{% else %}Aktif{% endif %}</span>
+                        {% else %}
+                            <span style="background: #ef4444; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">{% if lang == 'en' %}Inactive{% else %}Pasif{% endif %}</span>
+                        {% endif %}
+                        {% if user[7] %}
+                            <span style="background: #8b5cf6; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">Admin</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; color: white;">{{ user[8] }}</td>
+                    <td style="padding: 10px; text-align: center;">
+                        <a href="{{ url_for('admin_user_detail', user_id=user[0]) }}" 
+                           style="background: #667eea; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 0.8rem;">
+                            {% if lang == 'en' %}Details{% else %}Detay{% endif %}
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {% if pagination.pages > 1 %}
+        <div style="margin-top: 20px; text-align: center;">
+            {% for page_num in range(1, pagination.pages + 1) %}
+                {% if page_num == pagination.page %}
+                    <span style="background: #667eea; color: white; padding: 8px 12px; margin: 0 2px; border-radius: 4px;">{{ page_num }}</span>
+                {% else %}
+                    <a href="?page={{ page_num }}&search={{ search }}&status={{ status_filter }}" 
+                       style="background: rgba(255,255,255,0.1); color: white; padding: 8px 12px; margin: 0 2px; border-radius: 4px; text-decoration: none;">{{ page_num }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

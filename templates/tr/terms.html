@@ -1,0 +1,94 @@
+<!-- templates/tr/terms.html -->
+{% extends "base.html" %}
+
+{% block title %}Kullanım Şartları - BKTY Danışmanlık{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  <h1>📋 Kullanım Şartları</h1>
+  
+  <p><strong>Son Güncelleme:</strong> {{ "21.09.2025" }}</p>
+  
+  <h2>1. Genel Hükümler</h2>
+  <p>
+    Bu kullanım şartları, BKTY Consultancy web sitesi ve hizmetlerinin kullanımına ilişkin 
+    kuralları belirler. Sitemizi kullanarak bu şartları kabul etmiş sayılırsınız.
+  </p>
+  
+  <h2>2. Hizmet Tanımı</h2>
+  <p>
+    BKTY Consultancy olarak sunduğumuz hizmetler:
+  </p>
+  <ul>
+    <li>Dijital pazarlama danışmanlığı</li>
+    <li>AI destekli çözümler</li>
+    <li>Web otomasyon sistemleri</li>
+    <li>Amazon e-ticaret danışmanlığı</li>
+    <li>Lojistik ve ihracat hizmetleri</li>
+    <li>Özel yazılım geliştirme</li>
+  </ul>
+  
+  <h2>3. Kullanıcı Yükümlülükleri</h2>
+  <p>Kullanıcılar olarak:</p>
+  <ul>
+    <li>Doğru ve güncel bilgiler vermeyi</li>
+    <li>Hizmetleri yasalara uygun şekilde kullanmayı</li>
+    <li>Başkalarının haklarına saygı göstermeyi</li>
+    <li>Sistemi kötüye kullanmamayı taahhüt edersiniz</li>
+  </ul>
+  
+  <h2>4. AI Asistan Kullanımı</h2>
+  <p>
+    AI asistan hizmeti kullanırken:
+  </p>
+  <ul>
+    <li>Kişisel ve hassas bilgileri paylaşmaktan kaçının</li>
+    <li>AI yanıtlarının tavsiye niteliğinde olduğunu unutmayın</li>
+    <li>Önemli kararlar için profesyonel danışmanlık alın</li>
+    <li>Üretilen içeriğin telif haklarına saygı gösterin</li>
+  </ul>
+  
+  <h2>5. Fikri Mülkiyet</h2>
+  <p>
+    Site içeriği, tasarım ve yazılımlar BKTY Consultancy'nin fikri mülkiyetidir. 
+    İzinsiz kullanım, kopyalama veya dağıtım yasaktır.
+  </p>
+  
+  <h2>6. Gizlilik</h2>
+  <p>
+    Kişisel verileriniz <a href="{{ url_for('privacy_page') }}">Gizlilik Politikamız</a> 
+    kapsamında işlenir ve korunur.
+  </p>
+  
+  <h2>7. Sorumluluk Sınırları</h2>
+  <p>
+    BKTY Consultancy, hizmet kesintileri, veri kaybı veya dolaylı zararlardan 
+    sorumlu değildir. Hizmetler "olduğu gibi" sunulmaktadır.
+  </p>
+  
+  <h2>8. Değişiklikler</h2>
+  <p>
+    Bu şartlarda değişiklik yapma hakkımız saklıdır. Değişiklikler site üzerinden 
+    duyurulacaktır.
+  </p>
+  
+  <h2>9. İletişim</h2>
+  <p>
+    Kullanım şartları hakkında sorularınız için:
+    <br>
+    📧 Email: <a href="mailto:legal@bktyconsultancy.co.uk">legal@bktyconsultancy.co.uk</a>
+    <br>
+    📞 Telefon: +44 20 1234 5678
+  </p>
+  
+  <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+    <h3>Hızlı Bağlantılar</h3>
+    <p>
+      <a href="{{ url_for('privacy_page') }}">Gizlilik Politikası</a> | 
+      <a href="{{ url_for('cookie_policy') }}">Çerez Politikası</a> | 
+      <a href="{{ url_for('contact_tr') }}">İletişim</a> | 
+      <a href="{{ url_for('complaints_page') }}">Şikayet</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

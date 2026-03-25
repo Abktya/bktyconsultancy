@@ -1,0 +1,404 @@
+{% extends "base.html" %}
+{% set lang = 'tr' %}
+{% block title %}SwipeFoto - Akıllı Fotoğraf Yönetim Uygulaması | Bkty Consultancy{% endblock %}
+{% block content %}
+
+<!-- Hero Bölümü -->
+<div class="container-fluid bg-gradient-to-r from-blue-600 to-purple-600 text-white py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-10 mx-auto text-center">
+        <div class="mb-4">
+          <i class="fas fa-images fa-5x mb-3 opacity-90"></i>
+        </div>
+        <h1 class="display-3 fw-bold mb-4">SwipeFoto</h1>
+        <p class="lead mb-4 fs-4">Fotoğraflarınızı Basit Kaydırma Hareketleriyle Düzenleyin</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <span class="badge bg-light text-primary px-4 py-3 fs-6">📱 iOS</span>
+          <span class="badge bg-light text-primary px-4 py-3 fs-6">🎨 Fotoğraf Düzenleme</span>
+          <span class="badge bg-light text-primary px-4 py-3 fs-6">🗂️ Akıllı Organizasyon</span>
+          <span class="badge bg-light text-primary px-4 py-3 fs-6">🔍 Kopya Tespiti</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Uygulama Tanıtımı -->
+  <div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+      <div class="card border-0 shadow-sm rounded-4 p-4">
+        <div class="card-body">
+          <h2 class="text-center mb-4 text-primary">SwipeFoto Nedir?</h2>
+          <p class="lead text-center text-muted mb-4">
+            <strong>SwipeFoto</strong>, sezgisel kaydırma hareketleri ile fotoğraf yönetimini devrim niteliğinde değiştiren, fotoğraf kitaplığınızı düzenlemeyi, düzenlemeyi ve yönetmeyi çocuk oyuncağı haline getiren yenilikçi bir iOS uygulamasıdır.
+          </p>
+          <div class="text-center">
+            <div class="d-inline-flex align-items-center gap-3 bg-light rounded-pill px-4 py-3">
+              <i class="fas fa-star text-warning"></i>
+              <span class="fw-bold">App Store'da Mevcut</span>
+              <i class="fab fa-apple fa-2x text-dark"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ana Özellikler -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-primary">
+        <i class="fas fa-sparkles me-2"></i>
+        Öne Çıkan Özellikler
+      </h2>
+      
+      <div class="row g-4">
+        <!-- Kaydırma Hareketleri -->
+        <div class="col-lg-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0 p-4">
+              <div class="text-center">
+                <i class="fas fa-hand-pointer fa-3x mb-3"></i>
+                <h4 class="mb-0">Sezgisel Kaydırma Hareketleri</h4>
+              </div>
+            </div>
+            <div class="card-body p-4">
+              <ul class="list-unstyled mb-0">
+                <li class="mb-3">
+                  <i class="fas fa-arrow-right text-danger me-2"></i>
+                  <strong>Sağa Kaydır</strong> - Fotoğrafı sil
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-arrow-left text-primary me-2"></i>
+                  <strong>Sola Kaydır</strong> - Klasöre taşı
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-arrow-up text-success me-2"></i>
+                  <strong>Yukarı Kaydır</strong> - Önceki fotoğraf
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-arrow-down text-warning me-2"></i>
+                  <strong>Aşağı Kaydır</strong> - Sonraki fotoğraf
+                </li>
+                <li class="mb-0">
+                  <i class="fas fa-search-plus text-info me-2"></i>
+                  <strong>Uzun Basış</strong> - Yakınlaştır/uzaklaştır
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fotoğraf Düzenleme -->
+        <div class="col-lg-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 p-4">
+              <div class="text-center">
+                <i class="fas fa-paint-brush fa-3x mb-3"></i>
+                <h4 class="mb-0">Profesyonel Fotoğraf Editörü</h4>
+              </div>
+            </div>
+            <div class="card-body p-4">
+              <p class="fw-bold mb-3">🎨 Filtreler:</p>
+              <ul class="list-unstyled mb-3 ms-3">
+                <li class="mb-2">• 6 Profesyonel Filtre (S/B, Chrome, Fade...)</li>
+                <li class="mb-2">• Gerçek Zamanlı Önizleme</li>
+              </ul>
+              
+              <p class="fw-bold mb-3">⚙️ Ayarlamalar:</p>
+              <ul class="list-unstyled mb-3 ms-3">
+                <li class="mb-2">• Parlaklık, Kontrast, Doygunluk</li>
+                <li class="mb-2">• Özel Kaydırıcılar</li>
+              </ul>
+              
+              <p class="fw-bold mb-3">✨ Yaratıcı Araçlar:</p>
+              <ul class="list-unstyled mb-0 ms-3">
+                <li class="mb-2">• Metin Ekleme (9 Renk)</li>
+                <li class="mb-2">• 50+ Emoji Çıkartması</li>
+                <li class="mb-2">• Parmakla Boyutlandır & Döndür</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Akıllı Organizasyon -->
+        <div class="col-lg-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-gradient-to-r from-green-500 to-teal-500 text-white border-0 p-4">
+              <div class="text-center">
+                <i class="fas fa-folder-open fa-3x mb-3"></i>
+                <h4 class="mb-0">Akıllı Organizasyon</h4>
+              </div>
+            </div>
+            <div class="card-body p-4">
+              <p class="fw-bold mb-3">📁 Özel Klasörler:</p>
+              <ul class="list-unstyled mb-3 ms-3">
+                <li class="mb-2">• Sınırsız Klasör Oluşturma</li>
+                <li class="mb-2">• Özel İkonlar & Renkler</li>
+                <li class="mb-2">• Kaydırarak Hızlı Taşıma</li>
+              </ul>
+              
+              <p class="fw-bold mb-3">🔍 Kopya Bulucu:</p>
+              <ul class="list-unstyled mb-3 ms-3">
+                <li class="mb-2">• AI Destekli Tespit</li>
+                <li class="mb-2">• Ayarlanabilir Benzerlik (%85-%98)</li>
+                <li class="mb-2">• Toplu Silme</li>
+              </ul>
+              
+              <p class="fw-bold mb-3">🎯 Toplu Seçim:</p>
+              <ul class="list-unstyled mb-0 ms-3">
+                <li class="mb-2">• Çoklu Fotoğraf Seçimi</li>
+                <li class="mb-2">• Hızlı İşlemler</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teknoloji -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card border-0 rounded-4 overflow-hidden" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="card-body p-5 text-white">
+          <h2 class="text-center fw-bold mb-5">
+            <i class="fas fa-code me-3"></i>
+            Modern Teknoloji ile Geliştirildi
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-3 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fab fa-swift fa-4x mb-3"></i>
+                <h5 class="fw-bold">SwiftUI</h5>
+                <p class="mb-0">Modern iOS Framework</p>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-brain fa-4x mb-3"></i>
+                <h5 class="fw-bold">Vision Framework</h5>
+                <p class="mb-0">AI Destekli Tespit</p>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-camera fa-4x mb-3"></i>
+                <h5 class="fw-bold">Core Image</h5>
+                <p class="mb-0">Profesyonel Filtreler</p>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-language fa-4x mb-3"></i>
+                <h5 class="fw-bold">7 Dil</h5>
+                <p class="mb-0">Global Destek</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desteklenen Diller -->
+  <div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+      <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-5 text-center">
+          <h3 class="mb-4 text-primary">
+            <i class="fas fa-globe me-2"></i>
+            7 Dilde Kullanılabilir
+          </h3>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇬🇧 İngilizce</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇹🇷 Türkçe</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇫🇷 Fransızca</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇩🇪 Almanca</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇪🇸 İspanyolca</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇨🇳 Çince</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇸🇦 Arapça</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kullanım Alanları -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-primary">Kimler İçin İdeal</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-users fa-3x text-info mb-3"></i>
+              <h5>Aileler</h5>
+              <p class="text-muted mb-0">Aile fotoğraflarını ve anıları verimli şekilde düzenleyin</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-camera-retro fa-3x text-warning mb-3"></i>
+              <h5>Fotoğrafçılar</h5>
+              <p class="text-muted mb-0">Hareket halindeyken hızlı düzenleme ve organizasyon</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-mobile-alt fa-3x text-success mb-3"></i>
+              <h5>Herkes</h5>
+              <p class="text-muted mb-0">Fotoğraf kitaplığını düzenlemek isteyen herkes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Özellikler -->
+  <div class="row mb-5">
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <i class="fas fa-crown fa-4x text-warning"></i>
+          </div>
+          <h3 class="text-center mb-4">Premium Özellikler</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Reklamsız Deneyim</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Sınırsız Özel Klasör</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Gelişmiş Fotoğraf Düzenleme Araçları</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Tüm Profesyonel Filtreler</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Metin & Çıkartma Ekleme</span>
+            </li>
+            <li class="mb-0 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Öncelikli Destek</span>
+            </li>
+          </ul>
+          <div class="text-center mt-4">
+            <span class="badge bg-warning text-dark px-4 py-3 fs-5">
+              Ömür Boyu Erişim - £2.99
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <i class="fas fa-shield-alt fa-4x text-primary"></i>
+          </div>
+          <h3 class="text-center mb-4">Gizlilik & Güvenlik</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>Tüm işlemler cihazınızda gerçekleşir</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>Fotoğraflar buluta yüklenmez</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>Verileriniz sizde kalır</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>Reklam takibi yok</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>Tamamen çevrimdışı çalışır</span>
+            </li>
+            <li class="mb-0 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>GDPR Uyumlu</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Bölümü -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card border-0 rounded-4 overflow-hidden" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+        <div class="card-body p-5 text-white text-center">
+          <h2 class="fw-bold mb-4">Fotoğraflarınızı Düzenlemeye Hazır mısınız?</h2>
+          <p class="lead mb-4">SwipeFoto'yu şimdi indirin ve fotoğraf kitaplığınızı yönetmenin en kolay yolunu deneyimleyin</p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="#" class="btn btn-light btn-lg px-5 py-3 rounded-pill">
+              <i class="fab fa-apple me-2"></i>
+              App Store'dan İndirin
+            </a>
+            <a href="mailto:info@bktyconsultancy.co.uk" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+              <i class="fas fa-envelope me-2"></i>
+              Bize Ulaşın
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, var(--bs-primary), var(--bs-purple));
+  }
+  
+  .from-blue-600 { --bs-primary: #2563eb; }
+  .to-purple-600 { --bs-purple: #9333ea; }
+  .from-blue-500 { --bs-primary: #3b82f6; }
+  .to-cyan-500 { --bs-purple: #06b6d4; }
+  .from-purple-500 { --bs-primary: #a855f7; }
+  .to-pink-500 { --bs-purple: #ec4899; }
+  .from-green-500 { --bs-primary: #22c55e; }
+  .to-teal-500 { --bs-purple: #14b8a6; }
+  
+  .card {
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .card-header i {
+    animation: float 3s ease-in-out infinite;
+  }
+</style>
+
+{% endblock %}

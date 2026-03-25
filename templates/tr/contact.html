@@ -1,0 +1,564 @@
+{% extends "base.html" %}
+{% set lang = 'tr' %}
+{% block title %}İletişim - Bkty Consultancy{% endblock %}
+{% block content %}
+
+<style>
+  .contact-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .contact-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  
+  .contact-card:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+  }
+  
+  .contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .contact-info h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+  
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: rgba(255,255,255,0.85);
+  }
+  
+  .contact-detail i {
+    width: 20px;
+    margin-right: 12px;
+    color: #667eea;
+  }
+  
+  .contact-detail a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-detail a:hover {
+    color: #fff;
+  }
+  
+  .contact-form {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+  
+  .form-control::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  .form-control:invalid {
+    border-color: #e74c3c;
+  }
+  
+  .form-control:valid {
+    border-color: #27ae60;
+  }
+  
+  textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  .btn-submit {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 1rem;
+  }
+  
+  .btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  }
+  
+  .btn-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .operating-hours {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .operating-hours h4 {
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  
+  .hours-list {
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+  
+  /* Alert stilleri */
+  .alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  .alert-success {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    color: #28a745;
+  }
+  
+  .alert-danger {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+  }
+  
+  /* Form validation stilleri */
+  .form-error {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+  }
+  
+  .form-group.has-error .form-control {
+    border-color: #e74c3c;
+  }
+  
+  .form-group.has-error .form-error {
+    display: block;
+  }
+  
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .contact-card {
+      padding: 1.5rem;
+    }
+    
+    .contact-form {
+      padding: 1.5rem;
+    }
+    
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+<div class="contact-header">
+  <h1>İletişim</h1>
+  <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem;">
+    Projeleriniz için bizimle iletişime geçin
+  </p>
+</div>
+
+<div class="contact-grid">
+  <!-- İletişim Bilgileri -->
+  <div class="contact-card">
+    <div class="contact-icon">
+      <i class="fas fa-phone"></i>
+    </div>
+    <div class="contact-info">
+      <h3>Telefon & E-posta</h3>
+      <div class="contact-detail">
+        <i class="fas fa-phone"></i>
+        <a href="tel:+447501912738">+44 7501 912 738</a>
+      </div>
+      <div class="contact-detail">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:info@bktyconsultancy.co.uk">info@bktyconsultancy.co.uk</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Konum Bilgisi -->
+  <div class="contact-card">
+    <div class="contact-icon">
+      <i class="fas fa-map-marker-alt"></i>
+    </div>
+    <div class="contact-info">
+      <h3>Konum</h3>
+      <div class="contact-detail">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Rugby, Warwickshire</span>
+      </div>
+      <div class="contact-detail">
+        <i class="fas fa-globe"></i>
+        <span>United Kingdom</span>
+      </div>
+      <div class="contact-detail">
+        <i class="fas fa-clock"></i>
+        <span>GMT Saat Dilimi</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-form">
+  <h3 style="color: #fff; margin-bottom: 1.5rem; text-align: center;">
+    <i class="fas fa-paper-plane" style="margin-right: 10px; color: #667eea;"></i>
+    Proje Talebi Gönder
+  </h3>
+  
+  <!-- Flash mesajları -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+  <form method="POST" id="contactForm" novalidate>
+    <!-- CSRF Token - GÜVENLİK İÇİN ZORUNLU -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    
+    <div class="form-group">
+      <label for="name">Ad Soyad *</label>
+      <input type="text" 
+             id="name" 
+             name="name" 
+             class="form-control" 
+             placeholder="Adınız ve soyadınız" 
+             required 
+             maxlength="100"
+             minlength="2"
+             pattern="[A-Za-zÇĞİÖŞÜçğıöşü\s\-']+"
+             title="Sadece harf, boşluk ve tire karakterleri kullanın">
+      <div class="form-error">Ad en az 2 karakter olmalı ve sadece harf içermelidir.</div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">E-posta *</label>
+      <input type="email" 
+             id="email" 
+             name="email" 
+             class="form-control" 
+             placeholder="ornek@email.com" 
+             required 
+             maxlength="254"
+             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+             title="Geçerli bir e-posta adresi girin">
+      <div class="form-error">Lütfen geçerli bir e-posta adresi girin.</div>
+    </div>
+    
+    <div class="form-group">
+      <label for="phone">Telefon</label>
+      <input type="tel" 
+             id="phone" 
+             name="phone" 
+             class="form-control" 
+             placeholder="+44 7xxx xxx xxx"
+             maxlength="20"
+             pattern="[0-9\+\-\s\(\)]+"
+             title="Sadece rakam, +, -, (, ), ve boşluk karakterleri kullanın">
+      <div class="form-error">Lütfen geçerli bir telefon numarası girin.</div>
+    </div>
+    
+    <div class="form-group">
+      <label for="company">Şirket/Organizasyon</label>
+      <input type="text" 
+             id="company" 
+             name="company" 
+             class="form-control" 
+             placeholder="Şirket adınız"
+             maxlength="100">
+    </div>
+    
+    <div class="form-group">
+      <label for="service">Hizmet Türü</label>
+      <select id="service" name="service" class="form-control">
+        <option value="">Lütfen seçiniz</option>
+        <option value="amazon">Amazon E-ticaret Danışmanlığı</option>
+        <option value="ai">Yapay Zeka Çözümleri</option>
+        <option value="automation">Web Otomasyon Sistemleri</option>
+        <option value="logistics">Lojistik ve İhracat</option>
+        <option value="security">Dijital Güvenlik</option>
+        <option value="custom">Özel Yazılım Geliştirme</option>
+        <option value="other">Diğer</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="message">Proje Detayları *</label>
+      <textarea id="message" 
+                name="message" 
+                class="form-control" 
+                placeholder="Projeniz hakkında detaylı bilgi verin..." 
+                required
+                maxlength="2000"
+                minlength="10"></textarea>
+      <div class="form-error">Mesaj en az 10 karakter olmalıdır.</div>
+      <small style="color: rgba(255,255,255,0.6); font-size: 0.875rem;">En az 10, en fazla 2000 karakter</small>
+    </div>
+    
+    <button type="submit" class="btn-submit" id="submitBtn">
+      <span class="btn-text">
+        <i class="fas fa-send" style="margin-right: 8px;"></i>
+        Mesaj Gönder
+      </span>
+      <span class="btn-loading" style="display: none;">
+        <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i>
+        Gönderiliyor...
+      </span>
+    </button>
+  </form>
+</div>
+
+<!-- Çalışma Saatleri -->
+<div class="operating-hours">
+  <h4>
+    <i class="fas fa-business-time" style="margin-right: 10px; color: #667eea;"></i>
+    Çalışma Saatleri
+  </h4>
+  <div class="hours-list">
+    <strong>Pazartesi - Cuma:</strong> 09:00 - 18:00 (GMT)<br>
+    <strong>Cumartesi:</strong> 10:00 - 16:00 (GMT)<br>
+    <strong>Pazar:</strong> Kapalı<br><br>
+    <small style="color: rgba(255,255,255,0.6);">
+      <i class="fas fa-info-circle"></i>
+      Acil durumlar için 24 saat içinde yanıt vermeye çalışırız
+    </small>
+  </div>
+</div>
+
+<script{% if nonce %} nonce="{{ nonce }}"{% endif %}>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = document.querySelector('.btn-text');
+  const btnLoading = document.querySelector('.btn-loading');
+  
+  // Form validation
+  function validateField(field) {
+    const formGroup = field.closest('.form-group');
+    const errorDiv = formGroup.querySelector('.form-error');
+    
+    // Remove previous error state
+    formGroup.classList.remove('has-error');
+    
+    let isValid = true;
+    
+    // Required field check
+    if (field.hasAttribute('required') && !field.value.trim()) {
+      isValid = false;
+    }
+    
+    // Pattern check
+    if (field.hasAttribute('pattern') && field.value.trim()) {
+      const pattern = new RegExp(field.getAttribute('pattern'));
+      if (!pattern.test(field.value)) {
+        isValid = false;
+      }
+    }
+    
+    // Length checks
+    if (field.hasAttribute('minlength') && field.value.length > 0) {
+      if (field.value.length < parseInt(field.getAttribute('minlength'))) {
+        isValid = false;
+      }
+    }
+    
+    // Email specific validation
+    if (field.type === 'email' && field.value.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(field.value)) {
+        isValid = false;
+      }
+    }
+    
+    if (!isValid) {
+      formGroup.classList.add('has-error');
+    }
+    
+    return isValid;
+  }
+  
+  // Real-time validation
+  const inputs = form.querySelectorAll('input[required], textarea[required]');
+  inputs.forEach(input => {
+    input.addEventListener('blur', () => validateField(input));
+    input.addEventListener('input', () => {
+      const formGroup = input.closest('.form-group');
+      if (formGroup.classList.contains('has-error')) {
+        validateField(input);
+      }
+    });
+  });
+  
+  // Form submit
+  form.addEventListener('submit', function(e) {
+    let formIsValid = true;
+    
+    // Validate all required fields
+    inputs.forEach(input => {
+      if (!validateField(input)) {
+        formIsValid = false;
+      }
+    });
+    
+    if (!formIsValid) {
+      e.preventDefault();
+      alert('Lütfen tüm gerekli alanları doğru şekilde doldurun.');
+      return false;
+    }
+    
+    // Suspicious content check
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    const suspiciousPatterns = [
+      /<script/i,
+      /javascript:/i,
+      /<iframe/i,
+      /onclick=/i,
+      /onerror=/i,
+      /onload=/i,
+      /<a\s+href/i
+    ];
+    
+    const allText = (name + ' ' + email + ' ' + message).toLowerCase();
+    
+    for (let pattern of suspiciousPatterns) {
+      if (pattern.test(allText)) {
+        e.preventDefault();
+        alert('Güvenlik nedeniyle mesajınız gönderilemedi. Lütfen HTML kodları kullanmayın.');
+        return false;
+      }
+    }
+    
+    // Double submit prevention
+    if (submitBtn.disabled) {
+      e.preventDefault();
+      return false;
+    }
+    
+    // Show loading state
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline';
+    
+    // Re-enable button after 30 seconds (in case of network issues)
+    setTimeout(function() {
+      submitBtn.disabled = false;
+      btnText.style.display = 'inline';
+      btnLoading.style.display = 'none';
+    }, 30000);
+  });
+  
+  // Input sanitization
+  const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
+  
+  textInputs.forEach(function(input) {
+    input.addEventListener('paste', function(e) {
+      setTimeout(function() {
+        let value = input.value;
+        // Remove HTML tags
+        value = value.replace(/<[^>]*>/g, '');
+        // Remove suspicious characters
+        value = value.replace(/[<>'"&]/g, '');
+        input.value = value;
+      }, 10);
+    });
+    
+    input.addEventListener('input', function(e) {
+      let value = e.target.value;
+      // Prevent HTML tags in real-time
+      if (/<[^>]*>/.test(value)) {
+        e.target.value = value.replace(/<[^>]*>/g, '');
+      }
+    });
+  });
+});
+</script>
+
+{% endblock %}

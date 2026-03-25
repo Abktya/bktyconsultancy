@@ -1,0 +1,108 @@
+<!-- templates/tr/cookie_settings.html -->
+{% extends "base.html" %}
+
+{% block title %}Çerez Ayarları - BKTY Consultancy{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">Çerez Ayarları</h2>
+                </div>
+                <div class="card-body">
+                    <p>Web sitemizde kullanılan çerez türlerini yönetebilirsiniz.</p>
+
+                    <form method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Gerekli Çerezler</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="essential" id="essential" checked disabled>
+                                    <label class="form-check-label" for="essential">
+                                        <strong>Temel İşlevsellik</strong><br>
+                                        <small class="text-muted">Sitenin çalışması için gerekli çerezler (devre dışı bırakılamaz)</small>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5>İsteğe Bağlı Çerezler</h5>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" name="analytics" id="analytics" 
+                                           {{ 'checked' if cookie_preferences.get('analytics', False) }}>
+                                    <label class="form-check-label" for="analytics">
+                                        <strong>Analitik Çerezler</strong><br>
+                                        <small class="text-muted">Site kullanım istatistikleri ve performans analizi</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" name="marketing" id="marketing"
+                                           {{ 'checked' if cookie_preferences.get('marketing', False) }}>
+                                    <label class="form-check-label" for="marketing">
+                                        <strong>Pazarlama Çerezler</strong><br>
+                                        <small class="text-muted">Kişiselleştirilmiş reklamlar ve içerik</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" name="preferences" id="preferences"
+                                           {{ 'checked' if cookie_preferences.get('preferences', False) }}>
+                                    <label class="form-check-label" for="preferences">
+                                        <strong>Tercih Çerezleri</strong><br>
+                                        <small class="text-muted">Dil, tema ve kişisel ayarlarınız</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary me-2">
+                              Ayarları Kaydet
+                            </button>
+                            <button type="button" class="btn btn-success me-2 accept-all-btn">
+                              Tümünü Kabul Et
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary reject-all-btn">
+                              Tümünü Reddet
+                            </button>
+                          </div>                          
+                    </form>
+                    
+                    <div class="mt-4">
+                        <h6>Mevcut Durum:</h6>
+                        <small class="text-muted">
+                            {% if cookie_consent_given %}
+                                Çerez onayı verildi: {{ cookie_preferences | default('{}') }}
+                            {% else %}
+                                Çerez onayı henüz verilmedi
+                            {% endif %}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script nonce="{{ nonce }}">
+function acceptAll() {
+    document.getElementById('analytics').checked = true;
+    document.getElementById('marketing').checked = true;
+    document.getElementById('preferences').checked = true;
+}
+
+function rejectAll() {
+    document.getElementById('analytics').checked = false;
+    document.getElementById('marketing').checked = false;
+    document.getElementById('preferences').checked = false;
+}
+</script>
+{% endblock %}

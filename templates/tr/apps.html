@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+{% set lang = 'tr' %}
+{% block title %}Geliştirdiğimiz Uygulamalar - Bkty Consultancy{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="container-fluid bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-10 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4">Geliştirdiğimiz Uygulamalar</h1>
+        <p class="lead mb-4">İnovatif teknolojilerle geliştirilmiş özel yazılım çözümlerimiz</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <span class="badge bg-light text-primary px-3 py-2">🛡️ Güvenlik Odaklı</span>
+          <span class="badge bg-light text-primary px-3 py-2">🤖 AI Destekli</span>
+          <span class="badge bg-light text-primary px-3 py-2">📊 Analitik Çözümler</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  
+  <!-- Featured Application -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card border-0 rounded-4 overflow-hidden shadow-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="card-body p-5 text-white">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <div class="d-flex align-items-center mb-3">
+                <div class="feature-badge bg-white bg-opacity-20 rounded-pill px-3 py-1 me-3">
+                  <small class="fw-bold">ÖNE ÇIKAN UYGULAMA</small>
+                </div>
+              </div>
+              <h2 class="display-6 fw-bold mb-3">
+                <i class="fas fa-shield-alt me-3"></i>
+                GuardianParent
+              </h2>
+              <p class="lead mb-4">
+                Ebeveynlerin çocuklarının dijital aktivitelerini güvenle takip edebilmesi için geliştirilmiş ileri seviye bir uygulamadır. Zararlı içerikleri algılar, ekran kullanımını izler ve ebeveynlere anlık bildirimler sağlar.
+              </p>
+              
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-exclamation-triangle bg-white bg-opacity-20 rounded-circle p-2 me-3"></i>
+                    <small>Zararlı İçerik Tespiti</small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-clock bg-white bg-opacity-20 rounded-circle p-2 me-3"></i>
+                    <small>Ekran Süresi İzleme</small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-bell bg-white bg-opacity-20 rounded-circle p-2 me-3"></i>
+                    <small>Anlık Bildirimler</small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-desktop bg-white bg-opacity-20 rounded-circle p-2 me-3"></i>
+                    <small>Çoklu Platform Desteği</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-family fa-5x mb-3"></i>
+                <h5 class="fw-bold">Aile Güvenliği</h5>
+                <p class="mb-0">Dijital çağda çocuk güvenliği için profesyonel çözüm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Applications Grid -->
+  <div class="row g-4 mb-5">
+    
+    <!-- SEOTracker -->
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden application-card">
+        <div class="card-header bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center">
+            <div class="app-icon me-3">
+              <i class="fas fa-chart-line fa-2x"></i>
+            </div>
+            <div>
+              <h3 class="card-title mb-1 h4">SEOTracker</h3>
+              <p class="mb-0 opacity-90">Amazon Analiz Platformu</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <p class="mb-4">
+            Amazon satıcıları için geliştirilmiş profesyonel bir analiz platformudur. Ürün görünürlüğünü, sıralamaları, stok durumunu ve fiyat değişimlerini anlık takip ederek satıcıların rekabet gücünü artırır.
+          </p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-eye text-success me-2"></i>
+                <small>Ürün Görünürlüğü</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-sort-numeric-down text-success me-2"></i>
+                <small>Sıralama Takibi</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-boxes text-success me-2"></i>
+                <small>Stok Durumu</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-dollar-sign text-success me-2"></i>
+                <small>Fiyat Analizi</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BktyAI -->
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden application-card">
+        <div class="card-header bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center">
+            <div class="app-icon me-3">
+              <i class="fas fa-brain fa-2x"></i>
+            </div>
+            <div>
+              <h3 class="card-title mb-1 h4">BktyAI</h3>
+              <p class="mb-0 opacity-90">Yapay Zeka Platformu</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <p class="mb-4">
+            Yerel altyapıda çalışan LLM tabanlı yapay zekâ platformudur. GPT benzeri chatbot çözümleri, özel veri kümeleriyle fine-tuning, web/Telegram/WhatsApp entegrasyonu ve Alexa Skills desteği ile esnek kullanım sunar.
+          </p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-comments text-success me-2"></i>
+                <small>GPT Chatbot</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-database text-success me-2"></i>
+                <small>Fine-Tuning</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-link text-success me-2"></i>
+                <small>Çoklu Entegrasyon</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fab fa-amazon text-success me-2"></i>
+                <small>Alexa Skills</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SystemControlBot -->
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden application-card">
+        <div class="card-header bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center">
+            <div class="app-icon me-3">
+              <i class="fas fa-robot fa-2x"></i>
+            </div>
+            <div>
+              <h3 class="card-title mb-1 h4">SystemControlBot</h3>
+              <p class="mb-0 opacity-90">Otomasyon & Analiz Sistemi</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <p class="mb-4">
+            Kurumsal müşteriler için geliştirilen web otomasyon ve veri analizi sistemidir. Form doldurma, veri kazıma, raporlama ve özel entegrasyon çözümleri sunar.
+          </p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-wpforms text-success me-2"></i>
+                <small>Form Otomasyonu</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-spider text-success me-2"></i>
+                <small>Veri Kazıma</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-chart-bar text-success me-2"></i>
+                <small>Raporlama</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-plug text-success me-2"></i>
+                <small>Özel Entegrasyon</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SiteTestPro -->
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden application-card">
+        <div class="card-header bg-gradient-to-r from-green-500 to-teal-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center">
+            <div class="app-icon me-3">
+              <i class="fas fa-shield-virus fa-2x"></i>
+            </div>
+            <div>
+              <h3 class="card-title mb-1 h4">SiteTestPro</h3>
+              <p class="mb-0 opacity-90">Web Güvenlik Test Platformu</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <p class="mb-4">
+            Web güvenlik testlerini otomatikleştiren kapsamlı bir platformdur. XSS/SQL testleri, güvenlik başlıkları analizi ve Google Safe Browsing entegrasyonu ile sitelerin güvenliğini artırır.
+          </p>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-bug text-success me-2"></i>
+                <small>XSS/SQL Testleri</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-header text-success me-2"></i>
+                <small>Güvenlik Başlıkları</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fab fa-google text-success me-2"></i>
+                <small>Safe Browsing</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-item">
+                <i class="fas fa-file-alt text-success me-2"></i>
+                <small>Detaylı Raporlar</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Alexa Skills Section -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card border-0 rounded-4 shadow-sm">
+        <div class="card-header bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0 p-4">
+          <div class="d-flex align-items-center justify-content-center">
+            <div class="app-icon me-3">
+              <i class="fab fa-amazon fa-3x"></i>
+            </div>
+            <div class="text-center">
+              <h3 class="mb-1">Alexa Skills Projeleri</h3>
+              <p class="mb-0 opacity-90">Sesli Asistan Uygulamaları</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-5">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <p class="lead mb-4">
+                Hem çocuklara yönelik eğitici ve eğlenceli etkileşimli oyunlar, hem de işletmeler için özel komut setleri geliştirilerek Alexa ekosistemine uyumlu çözümler üretilmiştir.
+              </p>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                    <i class="fas fa-child text-primary fa-2x me-3"></i>
+                    <div>
+                      <h6 class="mb-1">Çocuk Uygulamaları</h6>
+                      <small class="text-muted">Eğitici ve eğlenceli oyunlar</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                    <i class="fas fa-building text-success fa-2x me-3"></i>
+                    <div>
+                      <h6 class="mb-1">Kurumsal Çözümler</h6>
+                      <small class="text-muted">İşletme özel komut setleri</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 text-center">
+              <div class="bg-primary bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-microphone fa-4x text-primary mb-3"></i>
+                <h5 class="text-primary">Sesli Etkileşim</h5>
+                <p class="text-muted mb-0">Alexa ile doğal dil işleme teknolojisi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technology Stack -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-primary">Kullandığımız Teknolojiler</h2>
+      <div class="row g-4">
+        <div class="col-md-3 text-center">
+          <div class="p-4">
+            <i class="fab fa-python fa-3x text-primary mb-3"></i>
+            <h5>Python</h5>
+            <p class="text-muted">AI/ML & Backend</p>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="p-4">
+            <i class="fab fa-js-square fa-3x text-warning mb-3"></i>
+            <h5>JavaScript</h5>
+            <p class="text-muted">Frontend & Node.js</p>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="p-4">
+            <i class="fas fa-cloud fa-3x text-info mb-3"></i>
+            <h5>Cloud Services</h5>
+            <p class="text-muted">AWS & Azure</p>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="p-4">
+            <i class="fas fa-database fa-3x text-success mb-3"></i>
+            <h5>Databases</h5>
+            <p class="text-muted">SQL & NoSQL</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center py-5">
+        <h2 class="mb-4">Size Özel Uygulama Geliştirmek İster Misiniz?</h2>
+        <p class="lead text-muted mb-4">İhtiyaçlarınıza özel yazılım çözümleri için bizimle iletişime geçin</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a href="#contact" class="btn btn-primary btn-lg px-4 py-3 rounded-pill">
+            <i class="fas fa-code me-2"></i>Proje Talebi Oluştur
+          </a>
+          <a href="#services" class="btn btn-outline-primary btn-lg px-4 py-3 rounded-pill">
+            <i class="fas fa-info-circle me-2"></i>Detaylı Bilgi Al
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .application-card {
+    transition: all 0.3s ease;
+  }
+  
+  .application-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+  }
+  
+  .app-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+  }
+  
+  .feature-item {
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .feature-badge {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, var(--bs-primary), var(--bs-purple));
+  }
+  
+  .from-indigo-600 { --bs-primary: #4f46e5; }
+  .to-purple-600 { --bs-purple: #9333ea; }
+  .from-orange-500 { --bs-primary: #f97316; }
+  .to-red-500 { --bs-purple: #ef4444; }
+  .from-blue-500 { --bs-primary: #3b82f6; }
+  .to-cyan-500 { --bs-purple: #06b6d4; }
+  .from-purple-500 { --bs-primary: #a855f7; }
+  .to-indigo-500 { --bs-purple: #6366f1; }
+  .from-green-500 { --bs-primary: #22c55e; }
+  .to-teal-500 { --bs-purple: #14b8a6; }
+  .from-yellow-500 { --bs-primary: #eab308; }
+  .to-orange-500 { --bs-purple: #f97316; }
+</style>
+
+{% endblock %}

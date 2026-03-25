@@ -1,0 +1,47 @@
+<!-- templates/en/error/500.html (İngilizce 500) -->
+{% extends "base.html" %}
+
+{% block title %}Server Error - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<!-- 500 CSS buraya kopyalanacak -->
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+  <div class="error-code">500</div>
+  <h1 class="error-title">Server Error</h1>
+  <p class="error-message">
+    Sorry, there was a technical problem on our server. Our engineering team 
+    is working to resolve the issue.
+  </p>
+  
+  <div class="error-actions">
+    <button onclick="location.reload()" class="error-btn">
+      🔄 Refresh Page
+    </button>
+    
+    <a href="{{ url_for('home_en') }}" class="error-btn secondary">
+      🏠 Back to Home
+    </a>
+    
+    <a href="{{ url_for('report_error') }}" class="error-btn secondary">
+      🐛 Report Error
+    </a>
+  </div>
+  
+  <div class="error-details">
+    <h3>What Can You Do?</h3>
+    <ul>
+      <li>Wait a few minutes and try again</li>
+      <li>Clear your browser cache</li>
+      <li>Try a different browser</li>
+      <li>Report the issue if it persists</li>
+    </ul>
+  </div>
+  
+  <div style="margin-top: 40px; color: #999; font-size: 0.9rem;">
+    Error Code: 500 | Time: {{ current_time.strftime('%d.%m.%Y %H:%M') if current_time else '' }}
+  </div>
+</div>
+{% endblock %}

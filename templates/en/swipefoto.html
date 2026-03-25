@@ -1,0 +1,404 @@
+{% extends "base.html" %}
+{% set lang = 'en' %}
+{% block title %}SwipeFoto - Smart Photo Management App | Bkty Consultancy{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="container-fluid bg-gradient-to-r from-blue-600 to-purple-600 text-white py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-10 mx-auto text-center">
+        <div class="mb-4">
+          <i class="fas fa-images fa-5x mb-3 opacity-90"></i>
+        </div>
+        <h1 class="display-3 fw-bold mb-4">SwipeFoto</h1>
+        <p class="lead mb-4 fs-4">Organize Your Photos with Simple Swipe Gestures</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <span class="badge bg-light text-primary px-4 py-3 fs-6">📱 iOS</span>
+          <span class="badge bg-light text-primary px-4 py-3 fs-6">🎨 Photo Editing</span>
+          <span class="badge bg-light text-primary px-4 py-3 fs-6">🗂️ Smart Organization</span>
+          <span class="badge bg-light text-primary px-4 py-3 fs-6">🔍 Duplicate Detection</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- App Overview -->
+  <div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+      <div class="card border-0 shadow-sm rounded-4 p-4">
+        <div class="card-body">
+          <h2 class="text-center mb-4 text-primary">What is SwipeFoto?</h2>
+          <p class="lead text-center text-muted mb-4">
+            <strong>SwipeFoto</strong> is an innovative iOS application that revolutionizes photo management through intuitive swipe gestures, making it effortless to organize, edit, and manage your photo library.
+          </p>
+          <div class="text-center">
+            <div class="d-inline-flex align-items-center gap-3 bg-light rounded-pill px-4 py-3">
+              <i class="fas fa-star text-warning"></i>
+              <span class="fw-bold">Available on the App Store</span>
+              <i class="fab fa-apple fa-2x text-dark"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Features -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-primary">
+        <i class="fas fa-sparkles me-2"></i>
+        Key Features
+      </h2>
+      
+      <div class="row g-4">
+        <!-- Swipe Gestures -->
+        <div class="col-lg-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0 p-4">
+              <div class="text-center">
+                <i class="fas fa-hand-pointer fa-3x mb-3"></i>
+                <h4 class="mb-0">Intuitive Swipe Gestures</h4>
+              </div>
+            </div>
+            <div class="card-body p-4">
+              <ul class="list-unstyled mb-0">
+                <li class="mb-3">
+                  <i class="fas fa-arrow-right text-danger me-2"></i>
+                  <strong>Swipe Right</strong> - Delete photo
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-arrow-left text-primary me-2"></i>
+                  <strong>Swipe Left</strong> - Move to folder
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-arrow-up text-success me-2"></i>
+                  <strong>Swipe Up</strong> - Previous photo
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-arrow-down text-warning me-2"></i>
+                  <strong>Swipe Down</strong> - Next photo
+                </li>
+                <li class="mb-0">
+                  <i class="fas fa-search-plus text-info me-2"></i>
+                  <strong>Long Press</strong> - Zoom in/out
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo Editing -->
+        <div class="col-lg-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 p-4">
+              <div class="text-center">
+                <i class="fas fa-paint-brush fa-3x mb-3"></i>
+                <h4 class="mb-0">Professional Photo Editor</h4>
+              </div>
+            </div>
+            <div class="card-body p-4">
+              <p class="fw-bold mb-3">🎨 Filters:</p>
+              <ul class="list-unstyled mb-3 ms-3">
+                <li class="mb-2">• 6 Professional Filters (B&W, Chrome, Fade...)</li>
+                <li class="mb-2">• Real-time Preview</li>
+              </ul>
+              
+              <p class="fw-bold mb-3">⚙️ Adjustments:</p>
+              <ul class="list-unstyled mb-3 ms-3">
+                <li class="mb-2">• Brightness, Contrast, Saturation</li>
+                <li class="mb-2">• Custom Sliders</li>
+              </ul>
+              
+              <p class="fw-bold mb-3">✨ Creative Tools:</p>
+              <ul class="list-unstyled mb-0 ms-3">
+                <li class="mb-2">• Text Overlays (9 Colors)</li>
+                <li class="mb-2">• 50+ Emoji Stickers</li>
+                <li class="mb-2">• Pinch to Resize & Rotate</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Smart Organization -->
+        <div class="col-lg-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-gradient-to-r from-green-500 to-teal-500 text-white border-0 p-4">
+              <div class="text-center">
+                <i class="fas fa-folder-open fa-3x mb-3"></i>
+                <h4 class="mb-0">Smart Organization</h4>
+              </div>
+            </div>
+            <div class="card-body p-4">
+              <p class="fw-bold mb-3">📁 Custom Folders:</p>
+              <ul class="list-unstyled mb-3 ms-3">
+                <li class="mb-2">• Create Unlimited Folders</li>
+                <li class="mb-2">• Custom Icons & Colors</li>
+                <li class="mb-2">• Quick Move with Swipe</li>
+              </ul>
+              
+              <p class="fw-bold mb-3">🔍 Duplicate Finder:</p>
+              <ul class="list-unstyled mb-3 ms-3">
+                <li class="mb-2">• AI-Powered Detection</li>
+                <li class="mb-2">• Adjustable Similarity (85%-98%)</li>
+                <li class="mb-2">• Batch Delete</li>
+              </ul>
+              
+              <p class="fw-bold mb-3">🎯 Bulk Selection:</p>
+              <ul class="list-unstyled mb-0 ms-3">
+                <li class="mb-2">• Multi-Select Photos</li>
+                <li class="mb-2">• Quick Actions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technology Stack -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card border-0 rounded-4 overflow-hidden" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="card-body p-5 text-white">
+          <h2 class="text-center fw-bold mb-5">
+            <i class="fas fa-code me-3"></i>
+            Built with Modern Technology
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-3 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fab fa-swift fa-4x mb-3"></i>
+                <h5 class="fw-bold">SwiftUI</h5>
+                <p class="mb-0">Modern iOS Framework</p>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-brain fa-4x mb-3"></i>
+                <h5 class="fw-bold">Vision Framework</h5>
+                <p class="mb-0">AI-Powered Detection</p>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-camera fa-4x mb-3"></i>
+                <h5 class="fw-bold">Core Image</h5>
+                <p class="mb-0">Professional Filters</p>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="bg-white bg-opacity-10 rounded-4 p-4">
+                <i class="fas fa-language fa-4x mb-3"></i>
+                <h5 class="fw-bold">7 Languages</h5>
+                <p class="mb-0">Global Support</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supported Languages -->
+  <div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+      <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-5 text-center">
+          <h3 class="mb-4 text-primary">
+            <i class="fas fa-globe me-2"></i>
+            Available in 7 Languages
+          </h3>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇬🇧 English</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇹🇷 Turkish</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇫🇷 French</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇩🇪 German</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇪🇸 Spanish</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇨🇳 Chinese</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">🇸🇦 Arabic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Use Cases -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-primary">Perfect For</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-users fa-3x text-info mb-3"></i>
+              <h5>Families</h5>
+              <p class="text-muted mb-0">Organize family photos and memories efficiently</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-camera-retro fa-3x text-warning mb-3"></i>
+              <h5>Photographers</h5>
+              <p class="text-muted mb-0">Quick editing and organization on the go</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4 text-center">
+              <i class="fas fa-mobile-alt fa-3x text-success mb-3"></i>
+              <h5>Everyone</h5>
+              <p class="text-muted mb-0">Anyone wanting to declutter their photo library</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Features -->
+  <div class="row mb-5">
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <i class="fas fa-crown fa-4x text-warning"></i>
+          </div>
+          <h3 class="text-center mb-4">Premium Features</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Ad-Free Experience</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Unlimited Custom Folders</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Advanced Photo Editing Tools</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>All Professional Filters</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Text & Sticker Overlays</span>
+            </li>
+            <li class="mb-0 d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-3"></i>
+              <span>Priority Support</span>
+            </li>
+          </ul>
+          <div class="text-center mt-4">
+            <span class="badge bg-warning text-dark px-4 py-3 fs-5">
+              Lifetime Access - £2.99
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <i class="fas fa-shield-alt fa-4x text-primary"></i>
+          </div>
+          <h3 class="text-center mb-4">Privacy & Security</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>All processing happens on your device</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>No photos uploaded to cloud</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>Your data stays with you</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>No ads tracking</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>Complete offline functionality</span>
+            </li>
+            <li class="mb-0 d-flex align-items-center">
+              <i class="fas fa-lock text-primary me-3"></i>
+              <span>GDPR Compliant</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card border-0 rounded-4 overflow-hidden" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+        <div class="card-body p-5 text-white text-center">
+          <h2 class="fw-bold mb-4">Ready to Organize Your Photos?</h2>
+          <p class="lead mb-4">Download SwipeFoto now and experience the easiest way to manage your photo library</p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="#" class="btn btn-light btn-lg px-5 py-3 rounded-pill">
+              <i class="fab fa-apple me-2"></i>
+              Download on App Store
+            </a>
+            <a href="mailto:info@bktyconsultancy.co.uk" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+              <i class="fas fa-envelope me-2"></i>
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, var(--bs-primary), var(--bs-purple));
+  }
+  
+  .from-blue-600 { --bs-primary: #2563eb; }
+  .to-purple-600 { --bs-purple: #9333ea; }
+  .from-blue-500 { --bs-primary: #3b82f6; }
+  .to-cyan-500 { --bs-purple: #06b6d4; }
+  .from-purple-500 { --bs-primary: #a855f7; }
+  .to-pink-500 { --bs-purple: #ec4899; }
+  .from-green-500 { --bs-primary: #22c55e; }
+  .to-teal-500 { --bs-purple: #14b8a6; }
+  
+  .card {
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .card-header i {
+    animation: float 3s ease-in-out infinite;
+  }
+</style>
+
+{% endblock %}

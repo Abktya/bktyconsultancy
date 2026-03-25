@@ -1,0 +1,331 @@
+<!-- Chat History Page - Updated with English/Turkish support -->
+{% extends "base.html" %}
+
+{% block title %}
+{% if lang == 'en' %}AI Chat History - BKTY Consultancy{% else %}AI Sohbet Geçmişi - BKTY Consultancy{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .chat-history-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  
+  .chat-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(15, 20, 35, 0.85);
+    border-radius: 15px;
+    align-items: center;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .filter-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .filter-input, .filter-select {
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border-radius: 8px;
+    min-width: 150px;
+  }
+  
+  .filter-input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  .chat-item {
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .chat-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  }
+  
+  .chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .chat-meta {
+    display: flex;
+    gap: 15px;
+    color: #cccccc;
+    font-size: 0.9rem;
+  }
+  
+  .chat-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chat-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(102, 126, 234, 0.8);
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .chat-btn:hover {
+    background: rgba(102, 126, 234, 1);
+    transform: translateY(-1px);
+  }
+  
+  .chat-btn.danger {
+    background: rgba(239, 68, 68, 0.8);
+  }
+  
+  .chat-btn.danger:hover {
+    background: rgba(239, 68, 68, 1);
+  }
+  
+  .chat-question {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  .chat-preview {
+    color: #cccccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(15, 20, 35, 0.85);
+    border-radius: 20px;
+    color: #cccccc;
+  }
+  
+  .empty-state h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .chat-filters {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .filter-group {
+      width: 100%;
+    }
+    
+    .filter-input, .filter-select {
+      min-width: auto;
+    }
+    
+    .chat-header {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+    }
+    
+    .chat-meta {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .download-container { max-width: 800px; margin: 20px auto; padding: 0 20px; }
+  .download-card {
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+  }
+  .data-category {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+  }
+  .data-category h3 { color: #ffffff; margin-bottom: 10px; }
+  .data-items { list-style: none; padding: 0; margin: 0; }
+  .data-items li {
+    color: #cccccc; padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    line-height: 1.4;
+  }
+  .data-items li:last-child { border-bottom: none; }
+  .download-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none; border-radius: 10px;
+    color: white; font-weight: 600;
+    cursor: pointer; transition: all 0.3s ease;
+    text-decoration: none; display: inline-block; font-size: 1rem;
+  }
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    color: white; text-decoration: none;
+  }
+  .download-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .download-btn.secondary {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .download-btn.secondary:hover { background: rgba(255,255,255,0.15); }
+  .progress-bar {
+    width: 100%; height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px; overflow: hidden;
+    margin: 15px 0; display: none;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease; width: 0%;
+  }
+  .status-message {
+    color: #cccccc; font-size: 0.9rem;
+    margin-top: 10px; display: none;
+    text-align: center; line-height: 1.5;
+  }
+  .info-box {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 12px; padding: 20px; margin: 30px 0;
+  }
+  .info-box h3 { color: #22c55e; margin-bottom: 10px; }
+  .info-box ul { color: #cccccc; line-height: 1.6; margin: 0; padding-left: 20px; }
+  @media (max-width: 768px) {
+    .download-card { padding: 20px; margin-bottom: 15px; }
+    .data-category { padding: 15px; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="download-container">
+  <div class="download-card">
+    <h1 style="color: #ffffff; margin-bottom: 20px;">
+      📥 {% if lang == 'en' %}Download My Data{% else %}Verilerimi İndir{% endif %}
+    </h1>
+    
+    <p style="color: #cccccc; margin-bottom: 30px; line-height: 1.6;">
+      {% if lang == 'en' %}
+        Under your GDPR rights, you can download all personal data we have collected about you. 
+        This data will be provided in JSON format, in a human-readable way.
+      {% else %}
+        GDPR haklarınız kapsamında, hakkınızda topladığımız tüm kişisel verileri indirebilirsiniz. 
+        Bu veriler JSON formatında, okunabilir şekilde sunulacaktır.
+      {% endif %}
+    </p>
+    
+    <!-- Profile Info -->
+    <div class="data-category">
+      <h3>👤 {% if lang == 'en' %}Profile Information{% else %}Profil Bilgileri{% endif %}</h3>
+      <ul class="data-items">
+        <li>{% if lang == 'en' %}Name, surname and contact info{% else %}Ad, soyad ve iletişim bilgileri{% endif %}</li>
+        <li>{% if lang == 'en' %}Email address & verification status{% else %}E-posta adresi ve doğrulama durumu{% endif %}</li>
+        <li>{% if lang == 'en' %}Account creation & last login dates{% else %}Hesap oluşturma & son giriş tarihleri{% endif %}</li>
+        <li>{% if lang == 'en' %}Language preferences & settings{% else %}Dil tercihleri & hesap ayarları{% endif %}</li>
+      </ul>
+    </div>
+    
+    <!-- AI Data -->
+    <div class="data-category">
+      <h3>🤖 {% if lang == 'en' %}AI Chat Data{% else %}AI Sohbet Verileri{% endif %}</h3>
+      <ul class="data-items">
+        <li>{% if lang == 'en' %}All chat history{% else %}Tüm sohbet geçmişi{% endif %}</li>
+        <li>{% if lang == 'en' %}Questions & AI responses{% else %}Sorular ve AI yanıtları{% endif %}</li>
+        <li>{% if lang == 'en' %}Models used & response times{% else %}Kullanılan modeller ve yanıt süreleri{% endif %}</li>
+        <li>{% if lang == 'en' %}Generated images (if any){% else %}Üretilen görseller (varsa){% endif %}</li>
+      </ul>
+    </div>
+    
+    <!-- Privacy -->
+    <div class="data-category">
+      <h3>🔒 {% if lang == 'en' %}Privacy & Consents{% else %}Gizlilik & Onaylar{% endif %}</h3>
+      <ul class="data-items">
+        <li>{% if lang == 'en' %}Data processing consents{% else %}Veri işleme onayları{% endif %}</li>
+        <li>{% if lang == 'en' %}Marketing consents{% else %}Pazarlama onayları{% endif %}</li>
+        <li>{% if lang == 'en' %}Cookie preferences{% else %}Çerez tercihleri{% endif %}</li>
+        <li>{% if lang == 'en' %}AI data retention settings{% else %}AI veri saklama ayarları{% endif %}</li>
+      </ul>
+    </div>
+    
+    <!-- Usage -->
+    <div class="data-category">
+      <h3>📊 {% if lang == 'en' %}Usage Data{% else %}Kullanım Verileri{% endif %}</h3>
+      <ul class="data-items">
+        <li>{% if lang == 'en' %}Login history{% else %}Giriş geçmişi{% endif %}</li>
+        <li>{% if lang == 'en' %}Page visit logs{% else %}Sayfa ziyaret logları{% endif %}</li>
+        <li>{% if lang == 'en' %}Error reports{% else %}Hata raporları{% endif %}</li>
+        <li>{% if lang == 'en' %}Support requests{% else %}Destek talepleri{% endif %}</li>
+      </ul>
+    </div>
+    
+    <!-- Info Box -->
+    <div class="info-box">
+      <h3>ℹ️ {% if lang == 'en' %}Important Information{% else %}Önemli Bilgiler{% endif %}</h3>
+      <ul>
+        <li>{% if lang == 'en' %}Preparation may take a few minutes{% else %}Hazırlama birkaç dakika sürebilir{% endif %}</li>
+        <li>{% if lang == 'en' %}For large data, link will be emailed{% else %}Büyük veri için link e-posta ile gönderilir{% endif %}</li>
+        <li>{% if lang == 'en' %}Download link valid for 7 days{% else %}İndirme linki 7 gün geçerlidir{% endif %}</li>
+        <li>{% if lang == 'en' %}Data will be provided in encrypted ZIP{% else %}Veriler şifreli ZIP dosyasıdır{% endif %}</li>
+      </ul>
+    </div>
+    
+    <!-- Actions -->
+    <div style="text-align: center; margin-top: 30px;">
+      <button onclick="requestDataDownload()" class="download-btn" id="downloadBtn">
+        📥 {% if lang == 'en' %}Start Data Download{% else %}Veri İndirmeyi Başlat{% endif %}
+      </button>
+      
+      <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="status-message" id="statusMessage"></div>
+      
+      <p style="color: #999; font-size: 0.85rem; margin-top: 20px;">
+        {% if lang == 'en' %}This action cannot be undone and will start preparation.{% else %}Bu işlem geri alınamaz ve veri hazırlama başlatılır.{% endif %}
+      </p>
+      
+      <div style="margin-top: 20px;">
+        <a href="{{ url_for('user_dashboard') }}" class="download-btn secondary">
+          ← {% if lang == 'en' %}Back{% else %}Geri Dön{% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

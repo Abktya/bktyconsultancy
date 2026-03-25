@@ -1,0 +1,228 @@
+<!-- templates/user/delete_account.html (Türkçe) -->
+{% extends "base.html" %}
+
+{% block title %}Hesabı Sil - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .delete-container {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .delete-card {
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+  }
+  
+  .warning-icon {
+    font-size: 4rem;
+    color: #ef4444;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .warning-list {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  
+  .warning-list h3 {
+    color: #ef4444;
+    margin-bottom: 15px;
+  }
+  
+  .warning-list ul {
+    color: #fca5a5;
+    line-height: 1.6;
+  }
+  
+  .confirmation-section {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 30px 0;
+  }
+  
+  .delete-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  .delete-btn {
+    padding: 14px 28px;
+    background: #ef4444;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+  }
+  
+  .delete-btn:hover {
+    background: #dc2626;
+  }
+  
+  .delete-btn:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+  }
+  
+  .cancel-btn {
+    padding: 14px 28px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .cancel-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="delete-container">
+  <div class="delete-card">
+    <div class="warning-icon">⚠️</div>
+    
+    <h1 style="color: #ef4444; text-align: center; margin-bottom: 20px;">Hesabı Kalıcı Olarak Sil</h1>
+    
+    <p style="color: #cccccc; text-align: center; margin-bottom: 30px; line-height: 1.6;">
+      Bu işlem geri alınamaz. Hesabınızı sildiğinizde, tüm verileriniz kalıcı olarak silinecektir.
+    </p>
+    
+    <div class="warning-list">
+      <h3>🚨 Silinecek Veriler</h3>
+      <ul>
+        <li>Profil bilgileriniz ve hesap ayarları</li>
+        <li>Tüm AI sohbet geçmişiniz</li>
+        <li>Üretilen görüntüler ve dosyalar</li>
+        <li>Gizlilik tercihleri ve onaylar</li>
+        <li>Destek talepleri ve iletişim geçmişi</li>
+        <li>Tüm kullanım verileri ve loglar</li>
+      </ul>
+    </div>
+    
+    <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
+      <h3 style="color: #f59e0b; margin-bottom: 10px;">💡 Alternatif Seçenekler</h3>
+      <p style="color: #fbbf24; line-height: 1.6;">
+        Hesabınızı silmek yerine:
+      </p>
+      <ul style="color: #fbbf24; line-height: 1.6;">
+        <li>Hesabınızı geçici olarak devre dışı bırakabilirsiniz</li>
+        <li>Sadece AI verilerinizi silebilirsiniz</li>
+        <li>Email bildirimlerini kapatabilirsiniz</li>
+        <li>Gizlilik ayarlarınızı değiştirebilirsiniz</li>
+      </ul>
+    </div>
+    
+    <div class="confirmation-section">
+      <h3 style="color: #ffffff; margin-bottom: 15px;">Onay Gerekli</h3>
+      
+      <p style="color: #cccccc; margin-bottom: 15px;">
+        Hesabınızı silmek istediğinizden emin misiniz? Bu işlemi onaylamak için aşağıdaki kutucuğa 
+        <strong>"HESABIMI SİL"</strong> yazın:
+      </p>
+      
+      <input type="text" class="delete-input" id="confirmationInput" 
+             placeholder="HESABIMI SİL yazın..." maxlength="20">
+      
+      <div style="margin-top: 20px;">
+        <label style="color: #cccccc; display: flex; align-items: center; gap: 10px;">
+          <input type="checkbox" id="finalConfirmation" style="transform: scale(1.2);">
+          Tüm verilerimin kalıcı olarak silineceğini anlıyorum ve kabul ediyorum
+        </label>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+      <button class="delete-btn" id="deleteBtn" disabled>
+        🗑️ Hesabı Kalıcı Olarak Sil
+      </button>
+      
+      
+      <a href="{{ url_for('user_dashboard') }}" class="cancel-btn">
+        ← Vazgeç ve Geri Dön
+      </a>
+    </div>
+    
+    <p style="color: #999; font-size: 0.85rem; text-align: center; margin-top: 20px;">
+      Bu işlem 30 saniye içinde tamamlanır ve geri alınamaz.
+    </p>
+  </div>
+</div>
+
+<script nonce="{{ nonce }}">
+const confirmationInput = document.getElementById('confirmationInput');
+const finalConfirmation = document.getElementById('finalConfirmation');
+const deleteBtn = document.getElementById('deleteBtn');
+
+function checkConfirmation() {
+  const textCorrect = confirmationInput.value.trim() === 'HESABIMI SİL';
+  const checkboxChecked = finalConfirmation.checked;
+  
+  deleteBtn.disabled = !(textCorrect && checkboxChecked);
+}
+
+confirmationInput.addEventListener('input', checkConfirmation);
+finalConfirmation.addEventListener('change', checkConfirmation);
+
+function deleteAccount() {
+  if (!confirm('SON UYARI: Bu işlem geri alınamaz. Hesabınızı gerçekten silmek istiyor musunuz?')) {
+    return;
+  }
+  
+  deleteBtn.disabled = true;
+  deleteBtn.textContent = 'Siliniyor...';
+  
+  fetch('/api/delete-account', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      confirmation: 'HESABIMI SİL',
+      final_confirmation: true
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('Hesabınız başarıyla silindi. Ana sayfaya yönlendiriliyorsunuz.');
+      window.location.href = '/';
+    } else {
+      alert('Hata: ' + data.error);
+      deleteBtn.disabled = false;
+      deleteBtn.textContent = '🗑️ Hesabı Kalıcı Olarak Sil';
+    }
+  })
+  .catch(error => {
+    alert('Bağlantı hatası oluştu');
+    deleteBtn.disabled = false;
+    deleteBtn.textContent = '🗑️ Hesabı Kalıcı Olarak Sil';
+  });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!-- templates/en/error/403.html (İngilizce 403) -->
+{% extends "base.html" %}
+
+{% block title %}Access Denied - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<!-- 403 CSS buraya kopyalanacak -->
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+  <div class="error-code">403</div>
+  <h1 class="error-title">Access Denied</h1>
+  <p class="error-message">
+    You do not have permission to access this page. Please login or 
+    ensure you have the appropriate permissions.
+  </p>
+  
+  <div class="error-actions">
+    {% if not current_user %}
+      <a href="{{ url_for('login_page') }}" class="error-btn">
+        🔑 Login
+      </a>
+    {% endif %}
+    
+    <a href="{{ url_for('home_en') }}" class="error-btn secondary">
+      🏠 Back to Home
+    </a>
+    
+    <a href="{{ url_for('contact_en') }}" class="error-btn secondary">
+      📞 Get Help
+    </a>
+  </div>
+  
+  <div style="margin-top: 40px; color: #999; font-size: 0.9rem;">
+    Error Code: 403 | Time: {{ current_time.strftime('%d.%m.%Y %H:%M') if current_time else '' }}
+  </div>
+</div>
+{% endblock %}

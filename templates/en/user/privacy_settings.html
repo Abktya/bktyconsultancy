@@ -1,0 +1,165 @@
+<!-- Privacy Settings Page - English Only -->
+{% extends "base.html" %}
+
+{% block title %}Privacy Settings - BKTY Consultancy{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3>🔒 Privacy and Data Settings</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="privacySettingsForm">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                    
+                    <h5 style="color: #667eea; margin-bottom: 20px;">
+                        📋 Data Processing Consents
+                    </h5>
+                    
+                    <div class="form-check mb-4" style="padding: 15px; background: rgba(15, 20, 35, 0.5); border-radius: 8px;">
+                        <input class="form-check-input" type="checkbox" name="data_processing_consent" 
+                               id="data_processing_consent" {{ 'checked' if user.data_processing_consent }}
+                               style="transform: scale(1.2); margin-top: 3px;">
+                        <label class="form-check-label" for="data_processing_consent" style="margin-left: 8px; line-height: 1.5;">
+                            <strong style="color: #ffffff;">Data Processing Consent</strong><br>
+                            <small class="text-muted">Processing of personal data for service delivery</small>
+                        </label>
+                    </div>
+                    
+                    <div class="form-check mb-4" style="padding: 15px; background: rgba(15, 20, 35, 0.5); border-radius: 8px;">
+                        <input class="form-check-input" type="checkbox" name="marketing_consent" 
+                               id="marketing_consent" {{ 'checked' if user.marketing_consent }}
+                               style="transform: scale(1.2); margin-top: 3px;">
+                        <label class="form-check-label" for="marketing_consent" style="margin-left: 8px; line-height: 1.5;">
+                            <strong style="color: #ffffff;">Marketing Consent</strong><br>
+                            <small class="text-muted">Marketing communications and personalized content</small>
+                        </label>
+                    </div>
+                    
+                    <div class="form-check mb-4" style="padding: 15px; background: rgba(15, 20, 35, 0.5); border-radius: 8px;">
+                        <input class="form-check-input" type="checkbox" name="ai_data_consent" 
+                               id="ai_data_consent" {{ 'checked' if user.ai_data_consent }}
+                               style="transform: scale(1.2); margin-top: 3px;">
+                        <label class="form-check-label" for="ai_data_consent" style="margin-left: 8px; line-height: 1.5;">
+                            <strong style="color: #ffffff;">AI Data Processing Consent</strong><br>
+                            <small class="text-muted">Use of AI assistant features</small>
+                        </label>
+                    </div>
+                    
+                    <hr style="border-color: rgba(255,255,255,0.2); margin: 30px 0;">
+                    
+                    <h5 style="color: #667eea; margin-bottom: 20px;">
+                        ⏰ AI Data Retention Period
+                    </h5>
+                    <div class="form-group mb-4">
+                        <label for="ai_data_retention_days" style="color: #cccccc; margin-bottom: 8px;">
+                            Data Retention Period (days):
+                        </label>
+                        <select class="form-control" name="ai_data_retention_days" id="ai_data_retention_days"
+                                style="background: rgba(15, 20, 35, 0.8); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                            <option value="30" {{ 'selected' if user.ai_data_retention_days == 30 }}>30 days</option>
+                            <option value="90" {{ 'selected' if user.ai_data_retention_days == 90 }}>90 days</option>
+                            <option value="180" {{ 'selected' if user.ai_data_retention_days == 180 }}>180 days</option>
+                            <option value="365" {{ 'selected' if user.ai_data_retention_days == 365 }}>1 year</option>
+                        </select>
+                        <small class="form-text text-muted" style="margin-top: 5px;">
+                            AI chat data will be automatically deleted after this period
+                        </small>
+                    </div>
+                    
+                    <hr style="border-color: rgba(255,255,255,0.2); margin: 30px 0;">
+                    
+                    <h5 style="color: #667eea; margin-bottom: 20px;">
+                        🍪 Cookie Settings
+                    </h5>
+                    <div class="mb-4" style="padding: 15px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px;">
+                        <p style="color: #cccccc; margin-bottom: 10px;">
+                            To manage your cookie preferences:
+                        </p>
+                        <a href="{{ url_for('cookie_settings') }}" class="btn btn-outline-primary btn-sm">
+                            🍪 Cookie Settings
+                        </a>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 30px;">
+                        <button type="submit" class="btn btn-primary" id="saveSettingsBtn">
+                            💾 Save Settings
+                        </button>
+                        <a href="{{ url_for('user_dashboard') }}" class="btn btn-secondary">
+                            ← Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>⚖️ Data Rights</h5>
+            </div>
+            <div class="card-body">
+                <h6 style="color: #667eea; margin-bottom: 15px;">GDPR Rights</h6>
+                <ul class="list-unstyled" style="line-height: 2;">
+                    <li>
+                        <a href="{{ url_for('download_data') }}" style="color: #cccccc; text-decoration: none;">
+                            📋 Download My Data
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('delete_account') }}" style="color: #cccccc; text-decoration: none;">
+                            🗑️ Delete My Data
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('gdpr_request') }}" style="color: #cccccc; text-decoration: none;">
+                            ✏️ Data Correction
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('complaints_page') }}" style="color: #cccccc; text-decoration: none;">
+                            📞 File Complaint
+                        </a>
+                    </li>
+                </ul>
+                
+                <hr style="border-color: rgba(255,255,255,0.2); margin: 20px 0;">
+                
+                <h6 style="color: #667eea; margin-bottom: 15px;">Account Security</h6>
+                <ul class="list-unstyled" style="line-height: 2;">
+                    <li>
+                        <a href="{{ url_for('change_password') }}" style="color: #cccccc; text-decoration: none;">
+                            🔒 Change Password
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('email_preferences') }}" style="color: #cccccc; text-decoration: none;">
+                            📧 Email Preferences
+                        </a>
+                    </li>
+                </ul>
+                
+                <hr style="border-color: rgba(255,255,255,0.2); margin: 20px 0;">
+                
+                <!-- Quick Actions -->
+                <div style="background: rgba(245, 158, 11, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.3);">
+                    <h6 style="color: #f59e0b; margin-bottom: 10px;">
+                        ⚡ Quick Actions
+                    </h6>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <button onclick="acceptAll()" class="btn btn-sm btn-success accept-all-btn">
+                            ✅ Accept All
+                        </button>
+                        <button onclick="rejectAll()" class="btn btn-sm btn-outline-danger reject-all-btn">
+                            ❌ Reject All
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,153 @@
+<!-- Admin Dashboard - Fixed Template -->
+{% extends "base.html" %}
+
+{% block title %}
+{% if lang == 'en' %}Admin Dashboard - BKTY Consultancy{% else %}Admin Dashboard - BKTY Consultancy{% endif %}
+{% endblock %}
+
+{% block content %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+<div style="max-width: 1200px; margin: 0 auto;">
+    <h1>🔧 {% if lang == 'en' %}Admin Dashboard{% else %}Admin Dashboard{% endif %}</h1>
+    
+    <!-- Statistics Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+        <div style="background: rgba(15, 20, 35, 0.85); padding: 20px; border-radius: 12px; text-align: center;">
+            <h3>👥 {% if lang == 'en' %}Total Users{% else %}Toplam Kullanıcı{% endif %}</h3>
+            <p style="font-size: 2rem; color: #667eea;">{{ stats.total_users }}</p>
+        </div>
+        
+        <div style="background: rgba(15, 20, 35, 0.85); padding: 20px; border-radius: 12px; text-align: center;">
+            <h3>✅ {% if lang == 'en' %}Verified{% else %}Doğrulanmış{% endif %}</h3>
+            <p style="font-size: 2rem; color: #22c55e;">{{ stats.verified_users }}</p>
+        </div>
+        
+        <div style="background: rgba(15, 20, 35, 0.85); padding: 20px; border-radius: 12px; text-align: center;">
+            <h3>💬 {% if lang == 'en' %}Today's Chats{% else %}Bugünkü Sohbetler{% endif %}</h3>
+            <p style="font-size: 2rem; color: #f59e0b;">{{ stats.chats_today }}</p>
+        </div>
+        
+        <div style="background: rgba(15, 20, 35, 0.85); padding: 20px; border-radius: 12px; text-align: center;">
+            <h3>🐛 {% if lang == 'en' %}Open Reports{% else %}Açık Raporlar{% endif %}</h3>
+            <p style="font-size: 2rem; color: #ef4444;">{{ stats.open_reports }}</p>
+        </div>
+    </div>
+    
+    <!-- Quick Links -->
+    <div style="background: rgba(15, 20, 35, 0.85); padding: 25px; border-radius: 12px; margin: 20px 0;">
+        <h3>📊 {% if lang == 'en' %}Quick Links{% else %}Hızlı Linkler{% endif %}</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+            <a href="{{ url_for('admin_users') }}" style="background: #667eea; color: white; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center;">
+                👥 {% if lang == 'en' %}Users{% else %}Kullanıcılar{% endif %}
+            </a>
+            <a href="{{ url_for('admin_system_status') }}" style="background: #22c55e; color: white; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center;">
+                🖥️ {% if lang == 'en' %}System Status{% else %}Sistem Durumu{% endif %}
+            </a>
+            <a href="{{ url_for('admin_activity_logs') }}" style="background: #f59e0b; color: white; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center;">
+                🕒 {% if lang == 'en' %}Activity Logs{% else %}Aktivite Logları{% endif %}
+            </a>
+            <a href="{{ url_for('admin_sessions') }}" style="background: #8b5cf6; color: white; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center;">
+                🔐 {% if lang == 'en' %}Active Sessions{% else %}Aktif Sessionlar{% endif %}
+            </a>
+            <a href="{{ url_for('admin_security_live') }}" style="background: #ef4444; color: white; padding: 15px; border-radius: 8px; text-decoration: none; text-align: center;">
+                🛡️ {% if lang == 'en' %}Security Monitor{% else %}Güvenlik İzleme{% endif %}
+            </a>
+        </div>
+    </div>
+    
+    <!-- Danger Zone - Delete All Users -->
+    <div style="background: rgba(220, 38, 38, 0.1); border: 2px solid rgba(220, 38, 38, 0.3); padding: 25px; border-radius: 12px; margin: 30px 0;">
+        <h3 style="color: #dc2626;">⚠️ {% if lang == 'en' %}Danger Zone{% else %}Tehlikeli Bölge{% endif %}</h3>
+        <p style="color: #fca5a5; margin: 15px 0;">
+            {% if lang == 'en' %}
+            Delete all non-admin users. This action cannot be undone!
+            {% else %}
+            Admin olmayan tüm kullanıcıları sil. Bu işlem geri alınamaz!
+            {% endif %}
+        </p>
+        
+        <input type="hidden" id="admin_csrf_token" value="{{ csrf_token }}">
+
+        <button id="deleteAllUsersBtn"
+                style="background: #dc2626; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            🗑️ {% if lang == 'en' %}Delete All Users (Except Admins){% else %}Tüm Kullanıcıları Sil (Admin Hariç){% endif %}
+        </button>
+        
+        <div id="deleteResult" style="margin-top: 15px; padding: 10px; border-radius: 5px; display: none;"></div>
+    </div>
+
+    <!-- Script - Dashboard için -->
+    <script nonce="{{ nonce }}">
+    (function() {
+        const deleteBtn = document.getElementById('deleteAllUsersBtn');
+        
+        if (!deleteBtn) return;
+        
+        deleteBtn.addEventListener('click', function() {
+            const confirmText = prompt('Onaylamak için "DELETE_ALL_USERS" yazın:');
+            
+            if (confirmText !== 'DELETE_ALL_USERS') {
+                alert('İptal edildi');
+                return;
+            }
+            
+            if (!confirm('Emin misiniz? Bu işlem geri alınamaz!')) {
+                return;
+            }
+            
+            const csrfToken = document.getElementById('admin_csrf_token').value;
+            
+            if (!csrfToken) {
+                alert('CSRF token bulunamadı');
+                return;
+            }
+            
+            const resultDiv = document.getElementById('deleteResult');
+            if (resultDiv) {
+                resultDiv.style.display = 'block';
+                resultDiv.style.background = 'rgba(59, 130, 246, 0.2)';
+                resultDiv.style.color = '#60a5fa';
+                resultDiv.innerHTML = '⏳ İşlem yapılıyor...';
+            }
+            
+            fetch('/admin/users/delete-all-non-admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'csrf_token': csrfToken,
+                    'confirmation': confirmText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (resultDiv) {
+                    if (data.success) {
+                        resultDiv.style.background = 'rgba(34, 197, 94, 0.2)';
+                        resultDiv.style.color = '#22c55e';
+                        resultDiv.innerHTML = `✅ ${data.message} (${data.deleted} kullanıcı silindi)`;
+                        setTimeout(() => location.reload(), 2000);
+                    } else {
+                        resultDiv.style.background = 'rgba(239, 68, 68, 0.2)';
+                        resultDiv.style.color = '#ef4444';
+                        resultDiv.innerHTML = `❌ Hata: ${data.error}`;
+                    }
+                }
+            })
+            .catch(err => {
+                console.error('Delete error:', err);
+                if (resultDiv) {
+                    resultDiv.style.background = 'rgba(239, 68, 68, 0.2)';
+                    resultDiv.style.color = '#ef4444';
+                    resultDiv.innerHTML = '❌ İstek hatası: ' + err.message;
+                }
+            });
+        });
+    })();
+    </script>
+
+
+{% endblock %}

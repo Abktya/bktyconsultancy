@@ -1,0 +1,297 @@
+<!-- templates/user/report_error.html (Türkçe) -->
+{% extends "base.html" %}
+
+{% block title %}Hata Bildir - BKTY Consultancy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .report-container {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .report-card {
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    display: block;
+    color: #ffffff;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  }
+  
+  .form-input::placeholder, .form-textarea::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  .form-select option {
+    background: #1a1a2e;
+    color: #ffffff;
+  }
+  
+  .priority-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .priority-option {
+    padding: 12px 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .priority-option:hover {
+    background: rgba(255,255,255,0.1);
+  }
+  
+  .priority-option.selected {
+    background: rgba(102, 126, 234, 0.3);
+    border-color: #667eea;
+  }
+  
+  .priority-low { color: #22c55e; }
+  .priority-medium { color: #f59e0b; }
+  .priority-high { color: #ef4444; }
+  .priority-critical { color: #dc2626; font-weight: bold; }
+  
+  .priority-option small {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-top: 4px;
+  }
+  
+  .file-upload {
+    border: 2px dashed rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .file-upload:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+  }
+  
+  .submit-btn {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+  }
+  
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  }
+  
+  .submit-btn:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .cancel-btn {
+    padding: 14px 28px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  .cancel-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  @media (max-width: 768px) {
+    .report-container {
+      margin: 15px;
+    }
+    
+    .report-card {
+      padding: 20px;
+    }
+    
+    .priority-options {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .file-upload {
+      padding: 20px;
+    }
+    
+    .submit-btn, .cancel-btn {
+      width: 100%;
+      margin-bottom: 10px;
+      margin-right: 0;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="report-container">
+  <div class="report-card">
+    <h1 style="color: #ffffff; margin-bottom: 20px;">🐛 Hata Bildir</h1>
+    
+    <p style="color: #cccccc; margin-bottom: 30px; line-height: 1.6;">
+      Platformumuzda karşılaştığınız teknik sorunları buradan bildirebilirsiniz. 
+      Detaylı bilgi vermeniz sorunun daha hızlı çözülmesine yardımcı olur.
+    </p>
+    
+    <form method="POST" enctype="multipart/form-data" id="errorReportForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      
+      <div class="form-group">
+        <label for="error_category" class="form-label">Hata Kategorisi *</label>
+        <select id="error_category" name="error_category" class="form-select" required>
+          <option value="">Kategori seçin...</option>
+          <option value="ai_chat">AI Sohbet Sorunları</option>
+          <option value="image_generation">Görüntü Üretimi</option>
+          <option value="login_auth">Giriş/Kimlik Doğrulama</option>
+          <option value="profile_settings">Profil/Ayarlar</option>
+          <option value="performance">Performans Sorunları</option>
+          <option value="ui_bugs">Arayüz Hataları</option>
+          <option value="data_sync">Veri Senkronizasyonu</option>
+          <option value="other">Diğer</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="error_title" class="form-label">Hata Başlığı *</label>
+        <input type="text" id="error_title" name="error_title" class="form-input" 
+               placeholder="Kısa ve açıklayıcı bir başlık..." required maxlength="200">
+      </div>
+      
+      <div class="form-group">
+        <label for="error_description" class="form-label">Detaylı Açıklama *</label>
+        <textarea id="error_description" name="error_description" class="form-textarea" 
+                  placeholder="Hatayı detaylı olarak açıklayın:&#10;- Ne yapmaya çalışıyordunuz?&#10;- Ne oldu?&#10;- Hangi adımları izlediniz?&#10;- Hata mesajı aldınız mı?" 
+                  required maxlength="2000"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Öncelik Seviyesi *</label>
+        <div class="priority-options">
+          <div class="priority-option priority-low" data-priority="low">
+            <div>📗 Düşük</div>
+            <small>Küçük sorun</small>
+          </div>
+          <div class="priority-option priority-medium" data-priority="medium">
+            <div>📙 Orta</div>
+            <small>Normal sorun</small>
+          </div>
+          <div class="priority-option priority-high" data-priority="high">
+            <div>📕 Yüksek</div>
+            <small>Önemli sorun</small>
+          </div>
+          <div class="priority-option priority-critical" data-priority="critical">
+            <div>🚨 Kritik</div>
+            <small>Acil sorun</small>
+          </div>
+        </div>
+        <input type="hidden" id="priority" name="priority" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="browser_info" class="form-label">Tarayıcı/Sistem Bilgisi</label>
+        <input type="text" id="browser_info" name="browser_info" class="form-input" 
+               placeholder="Chrome 120, Windows 11..." maxlength="100">
+      </div>
+      
+      <div class="form-group">
+        <label for="error_url" class="form-label">Hatanın Oluştuğu Sayfa</label>
+        <input type="url" id="error_url" name="error_url" class="form-input" 
+               placeholder="https://..." maxlength="500">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Ekran Görüntüsü veya Dosya Ekle</label>
+        <div class="file-upload" data-trigger-file="file_upload">
+          <div style="font-size: 2rem; margin-bottom: 10px;">📎</div>
+          <div style="color: #ffffff; margin-bottom: 5px;">Dosya Yükle</div>
+          <div style="color: #999; font-size: 0.9rem;">Ekran görüntüsü, hata mesajı veya log dosyası</div>
+          <div style="color: #999; font-size: 0.8rem; margin-top: 5px;">Maksimum 5MB - PNG, JPG, PDF</div>
+        </div>
+        <input type="file" id="file_upload" name="file_upload" style="display: none;" 
+               accept=".png,.jpg,.jpeg,.pdf,.txt,.log">
+      </div>
+      
+      <div class="form-group">
+        <label style="color: #cccccc; display: flex; align-items: center; gap: 10px;">
+          <input type="checkbox" name="contact_permission" value="1" style="transform: scale(1.2);">
+          Bu sorunla ilgili bana email ile geri dönüş yapılabilir
+        </label>
+      </div>
+      
+      <div style="margin-top: 30px;">
+        <button type="submit" class="submit-btn">
+          🚀 Hata Raporunu Gönder
+        </button>
+        
+        <a href="{{ url_for('user_dashboard') }}" class="cancel-btn">
+          ← İptal
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}

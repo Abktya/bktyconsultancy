@@ -1,0 +1,202 @@
+<!-- templates/tr/login.html -->
+{% extends "base.html" %}
+
+{% block title %}Giriş Yap - BKTY Danışmanlık{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-container {
+    max-width: 450px;
+    margin: 50px auto;
+    background: rgba(15, 20, 35, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+  
+  .auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .auth-header h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  
+  .auth-header p {
+    color: #cccccc;
+    font-size: 0.95rem;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    display: block;
+    color: #ffffff;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  }
+  
+  .form-input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  .form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .form-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #667eea;
+  }
+  
+  .form-checkbox label {
+    color: #cccccc;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .auth-button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .auth-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  }
+  
+  .auth-button:active {
+    transform: translateY(0);
+  }
+  
+  .auth-links {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .auth-links a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin: 5px 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .auth-links a:hover {
+    color: #8b9cf8;
+    text-decoration: underline;
+  }
+  
+  .error-message {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .success-message {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #86efac;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    .auth-container {
+      margin: 20px 15px;
+      padding: 30px 20px;
+    }
+    
+    .auth-header h1 {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-header">
+    <h1>🔑 Giriş Yap</h1>
+    <p>Hesabınıza giriş yaparak tüm özelliklere erişin</p>
+  </div>
+
+  <form method="POST" action="{{ url_for('login_page') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    
+    
+    <div class="form-group">
+      <label for="email" class="form-label">E-posta Adresi *</label>
+      <input type="email" id="email" name="email" class="form-input" 
+             placeholder="ornek@email.com" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password" class="form-label">Şifre *</label>
+      <input type="password" id="password" name="password" class="form-input" 
+             placeholder="Şifrenizi girin" required>
+    </div>
+    
+    <div class="form-checkbox">
+      <input type="checkbox" id="remember_me" name="remember_me">
+      <label for="remember_me">Beni hatırla</label>
+    </div>
+    
+    <button type="submit" class="auth-button">Giriş Yap</button>
+    
+    <div class="auth-links">
+      <a href="{{ url_for('register_page') }}">Hesabınız yok mu? Kayıt olun</a>
+      <br>
+      <a href="{{ url_for('forgot_password') }}">Şifrenizi mi unuttunuz?</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+

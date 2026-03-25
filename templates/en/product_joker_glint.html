@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% set lang = 'en' %}
+{% block title %}Joker Glint - Herbal Multi-Purpose Cleaner{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="container-fluid bg-gradient-to-r from-green-600 to-teal-600 text-white py-5 mb-5">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold mb-4">Joker Glint</h1>
+    <p class="lead mb-4">Herbal Multi-Purpose Cleaner</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <span class="badge bg-light text-success px-3 py-2">🇹🇷 Produced in Turkey</span>
+      <span class="badge bg-light text-success px-3 py-2">🇬🇧 Official UK Distributor: Bkty Consultancy</span>
+      <span class="badge bg-light text-success px-3 py-2">🌿 100% Plant-Based Formula</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Product Intro -->
+  <div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+      <div class="card border-0 shadow-sm rounded-4 p-4">
+        <div class="card-body text-center">
+          <h2 class="text-success mb-4">Natural and Powerful Cleaning</h2>
+          <p class="lead text-muted">
+            <strong>Joker Glint</strong> is a herbal, plant-based multi-purpose cleaning solution 
+            produced in Turkey. With its refreshing lemon scent, it removes even the toughest stains 
+            without harmful chemicals. 
+            <br><br>
+            <strong>In the United Kingdom, it is exclusively distributed by Bkty Consultancy.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Features -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-success">Key Features</h2>
+      <div class="row g-4">
+        <div class="col-md-4 text-center">
+          <i class="fas fa-leaf fa-3x text-success mb-3"></i>
+          <h5>100% Plant-Based</h5>
+          <p class="text-muted">Eco-friendly, safe for family and pets.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="fas fa-broom fa-3x text-success mb-3"></i>
+          <h5>Multi-Purpose</h5>
+          <p class="text-muted">Effective on carpets, upholstery, kitchens, bathrooms and more.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="fas fa-spray-can fa-3x text-success mb-3"></i>
+          <h5>Lemon Fresh</h5>
+          <p class="text-muted">Refreshing fragrance with strong stain removal power.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Usage Areas -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="text-center mb-5 text-success">Usage Areas</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+              <h5><i class="fas fa-home me-2 text-success"></i>Home & Daily Cleaning</h5>
+              <p class="mb-0">Perfect for carpets, upholstery, kitchens, bathrooms and tiles.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+              <h5><i class="fas fa-car me-2 text-success"></i>Automotive Cleaning</h5>
+              <p class="mb-0">Safely cleans car interiors, wheels, engines and upholstery.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+              <h5><i class="fas fa-utensils me-2 text-success"></i>Food Industry</h5>
+              <p class="mb-0">Ideal for restaurants, bakeries and food processing areas, maintaining hygiene standards.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+              <h5><i class="fas fa-soap me-2 text-success"></i>Laundry & Surfaces</h5>
+              <p class="mb-0">Removes stains and keeps fabrics and surfaces fresh and hygienic.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- CTA (EN) -->
+<div class="row mb-5">
+  <div class="col-12 text-center">
+    <h2 class="mb-4">Discover Joker Glint</h2>
+    <p class="lead text-muted mb-4">
+      Imported from Turkey and officially distributed in the UK by Bkty Consultancy. Choose your preferred size below:
+    </p>
+    <div class="row justify-content-center g-3">
+      <div class="col-12">
+        <a href="https://www.amazon.co.uk/Joker-Glint-Purpose-Herbal-Cleaner/dp/B08RBY2C7F?tag=bktyltd-21" 
+           target="_blank" 
+           class="btn btn-success btn-lg px-4 py-3 rounded-pill w-100">
+          <i class="fas fa-shopping-cart me-2"></i>Joker Glint 1000 ml
+        </a>
+      </div>
+      <div class="col-12">
+        <a href="https://www.amazon.co.uk/Glint-Purpose-Herbal-Cleaner-Remover/dp/B08R8XQHLS?tag=bktyltd-21" 
+           target="_blank" 
+           class="btn btn-outline-success btn-lg px-4 py-3 rounded-pill w-100">
+          <i class="fas fa-shopping-cart me-2"></i>Joker Glint 500 ml
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<style>
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, var(--bs-green), var(--bs-teal));
+  }
+  .from-green-600 { --bs-green: #16a34a; }
+  .to-teal-600 { --bs-teal: #0d9488; }
+  .card {
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12) !important;
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,144 @@
+<!-- templates/tr/privacy.html -->
+{% extends "base.html" %}
+
+{% block title %}Gizlilik Politikası - BKTY Danışmanlık{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  <h1>Gizlilik Politikası</h1>
+  
+  <p><strong>Son Güncelleme:</strong> {{ "21.09.2025" }}</p>
+  
+  <h2>1. Veri Sorumlusu</h2>
+  <p>
+    <strong>BKTY Consultancy</strong><br>
+    Adres: [Şirket Adresi]<br>
+    Email: privacy@bktyconsultancy.co.uk<br>
+    Telefon: +44 20 1234 5678
+  </p>
+  
+  <h2>2. Toplanan Kişisel Veriler</h2>
+  <p>Aşağıdaki kişisel verilerinizi toplayabiliriz:</p>
+  <ul>
+    <li><strong>Kimlik Bilgileri:</strong> Ad, soyad, email adresi</li>
+    <li><strong>İletişim Bilgileri:</strong> Telefon, adres</li>
+    <li><strong>Teknik Veriler:</strong> IP adresi, tarayıcı bilgileri, çerezler</li>
+    <li><strong>Kullanım Verileri:</strong> Site navigasyonu, AI sohbet geçmişi</li>
+    <li><strong>İş Bilgileri:</strong> Şirket adı, pozisyon (opsiyonel)</li>
+  </ul>
+  
+  <h2>3. Veri İşleme Amaçları</h2>
+  <p>Kişisel verilerinizi şu amaçlarla işleriz:</p>
+  <ul>
+    <li>Hizmet sunumu ve müşteri desteği</li>
+    <li>AI asistan hizmetlerinin sağlanması</li>
+    <li>İletişim kurma ve bilgilendirme</li>
+    <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+    <li>Güvenlik ve dolandırıcılık önleme</li>
+    <li>Hizmet geliştirme ve analiz (onayınızla)</li>
+  </ul>
+  
+  <h2>4. Veri İşleme Hukuki Dayanakları</h2>
+  <ul>
+    <li><strong>Sözleşme:</strong> Hizmet sunumu için gerekli işlemler</li>
+    <li><strong>Yasal Yükümlülük:</strong> Hukuki gerekliliklerin yerine getirilmesi</li>
+    <li><strong>Meşru Menfaat:</strong> Güvenlik ve hizmet geliştirme</li>
+    <li><strong>Açık Rıza:</strong> Pazarlama ve analitik için</li>
+  </ul>
+  
+  <h2>5. AI Sohbet Verileri</h2>
+  <p>
+    AI asistan kullanımınızla ilgili özel politikamız:
+  </p>
+  <ul>
+    <li>Sohbet geçmişiniz şifreli olarak saklanır</li>
+    <li>Verileriniz model eğitimi için kullanılmaz</li>
+    <li>Saklama süresini kendiniz belirleyebilirsiniz (7-365 gün)</li>
+    <li>İstediğiniz zaman sohbet geçmişinizi silebilirsiniz</li>
+  </ul>
+  
+  <h2>6. Veri Saklama Süreleri</h2>
+  <ul>
+    <li><strong>Hesap Bilgileri:</strong> Hesap aktif olduğu sürece</li>
+    <li><strong>AI Sohbet Geçmişi:</strong> Seçtiğiniz süre (varsayılan 30 gün)</li>
+    <li><strong>Log Kayıtları:</strong> Maksimum 2 yıl</li>
+    <li><strong>İletişim Kayıtları:</strong> 5 yıl</li>
+  </ul>
+  
+  <h2>7. Veri Paylaşımı</h2>
+  <p>
+    Verilerinizi yalnızca şu durumlarda üçüncü taraflarla paylaşırız:
+  </p>
+  <ul>
+    <li>Yasal zorunluluk durumunda</li>
+    <li>Hizmet sağlayıcıları ile (şifreli ve sınırlı)</li>
+    <li>Açık rızanız ile</li>
+  </ul>
+  
+  <h2>8. Veri Güvenliği</h2>
+  <p>
+    Verilerinizin güvenliği için aldığımız önlemler:
+  </p>
+  <ul>
+    <li>SSL/TLS şifreleme</li>
+    <li>Erişim kontrolü ve yetkilendirme</li>
+    <li>Düzenli güvenlik denetimleri</li>
+    <li>Veri yedekleme ve kurtarma planları</li>
+  </ul>
+  
+  <h2>9. Haklarınız (GDPR/KVKK)</h2>
+  <p>Kişisel verilerinizle ilgili haklarınız:</p>
+  <ul>
+    <li><strong>Bilgi alma hakkı:</strong> Hangi verilerinizin işlendiğini öğrenme</li>
+    <li><strong>Erişim hakkı:</strong> Verilerinizin kopyasını alma</li>
+    <li><strong>Düzeltme hakkı:</strong> Yanlış bilgileri düzeltme</li>
+    <li><strong>Silme hakkı:</strong> Verilerinizin silinmesini isteme</li>
+    <li><strong>Taşınabilirlik hakkı:</strong> Verilerinizi başka platformlara taşıma</li>
+    <li><strong>İtiraz hakkı:</strong> Veri işlemeye itiraz etme</li>
+  </ul>
+  
+  <h2>10. Çerezler</h2>
+  <p>
+    Çerez kullanımımız hakkında detaylı bilgi için 
+    <a href="{{ url_for('cookie_policy') }}">Çerez Politikamızı</a> inceleyebilirsiniz.
+  </p>
+  
+  <h2>11. İletişim</h2>
+  <p>
+    Gizlilik konularında bizimle iletişime geçin:
+    <br>
+    Email: <a href="mailto:privacy@bktyconsultancy.co.uk">privacy@bktyconsultancy.co.uk</a>
+    <br>
+    <a href="{{ url_for('gdpr_request') }}">GDPR Talep Formu</a>
+  </p>
+  
+  <div style="margin-top: 40px; padding: 20px; background: rgba(34, 197, 94, 0.1); border-radius: 12px; border: 1px solid rgba(34, 197, 94, 0.3);">
+    <h3>Hızlı Eylemler</h3>
+    <p>
+      <a href="{{ url_for('privacy_settings') }}" class="action-btn">Gizlilik Ayarları</a>
+      <a href="{{ url_for('download_data') }}" class="action-btn">Verilerimi İndir</a>
+      <a href="{{ url_for('gdpr_request') }}" class="action-btn">GDPR Talebi</a>
+    </p>
+  </div>
+</div>
+
+<style>
+.action-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+</style>
+{% endblock %}
